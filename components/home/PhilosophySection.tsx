@@ -25,11 +25,19 @@ export function PhilosophySection({
     <section className="relative flex flex-col overflow-hidden py-14 md:py-20 lg:min-h-[clamp(700px,85vh,1000px)] lg:py-24">
       <div className="absolute inset-0 z-0">
         <Image
+          src="/Images/Bg Images/MoreThanAGymBgPhone.png"
+          alt="More Than A Gym Mobile"
+          fill
+          sizes="100vw"
+          className="object-cover md:hidden block"
+          style={{ objectPosition: "center center" }}
+        />
+        <Image
           src="/Images/Bg Images/MoreThanAGym03.png"
           alt="More Than A Gym"
           fill
           sizes="100vw"
-          className="object-cover"
+          className="object-cover hidden md:block"
           style={{ objectPosition: "85% center" }}
         />
       </div>

@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-fight-black pt-32 pb-12 text-off-white min-h-[60vh] flex flex-col justify-end">
+    <footer className="relative overflow-hidden bg-fight-black pt-20 lg:pt-32 pb-8 lg:pb-12 text-off-white min-h-[60vh] flex flex-col justify-end">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -27,11 +27,11 @@ export function Footer() {
       </div>
 
       <div className="relative z-10 eff-container mt-auto pt-10">
-        <div className="grid grid-cols-1 gap-12 border-b border-line/70 pb-12 lg:grid-cols-12">
+        <div className="grid grid-cols-1 gap-8 lg:gap-12 border-b border-line/70 pb-10 lg:pb-12 lg:grid-cols-12">
           
           {/* Left Column: Brand & Social */}
           <div className="lg:col-span-4 flex flex-col items-start">
-            <div className="flex flex-col items-start leading-none mb-6">
+            <div className="flex flex-col items-start leading-none mb-4 lg:mb-6">
               <span className="type-display-md italic tracking-normal text-off-white">
                 EFF
               </span>
@@ -39,7 +39,7 @@ export function Footer() {
                 ELITE FIGHT FORCE
               </span>
             </div>
-            <p className="type-body-sm text-off-white/80 leading-relaxed mb-8 max-w-sm">
+            <p className="type-body-sm text-off-white/80 leading-relaxed mb-6 lg:mb-8 max-w-sm">
               Elite Fight Force or EFF is a MMA gym offering Boxing classes, Brazilian Jiu Jitsu classes (BJJ), Muay Thai classes, Strength & Conditioning and more. Our team boasts over 50 years of combined experience and have lead many fighters to amateur and professional titles and championships.
             </p>
             
@@ -61,7 +61,7 @@ export function Footer() {
           <div className="lg:col-span-8 flex flex-col gap-12 lg:pl-8 border-t border-line/30 pt-10 lg:border-t-0 lg:pt-0">
             
             {/* Top Row: Contact Methods */}
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8">
               <div>
                 <h3 className="type-label mb-5 text-off-white uppercase">Want to call us?</h3>
                 <div className="flex items-start gap-3">
@@ -103,7 +103,7 @@ export function Footer() {
             </div>
 
             {/* Bottom Row: Links & Sponsors */}
-            <div className="grid grid-cols-1 gap-8 sm:grid-cols-3 pt-8 border-t border-line/30">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-8 pt-6 sm:pt-8 border-t border-line/30">
               <div className="sm:col-span-1">
                 <h3 className="type-label mb-5 text-off-white uppercase">Quick Links</h3>
                 <ul className="flex flex-col gap-2.5">
@@ -120,7 +120,7 @@ export function Footer() {
 
               <div className="sm:col-span-2">
                 <h3 className="type-label mb-5 text-off-white uppercase">Sponsors</h3>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-4">
+                <ul className="grid grid-cols-2 sm:grid-cols-2 gap-y-2.5 gap-x-4">
                   {['WebDash', 'EPH', 'Marvel Skip Bins', 'AMS Solutions', 'Masnad Health Clinic', 'Confidential Cosmemtics', 'Plumbing Elite'].map((sponsor) => (
                     <li key={sponsor} className="flex items-center gap-2 type-body-sm text-off-white/80">
                       <ChevronsRight className="size-3.5 text-blood-red shrink-0" />

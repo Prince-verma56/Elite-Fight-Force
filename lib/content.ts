@@ -12,7 +12,7 @@ export interface HeroContent {
   headline: string[];
   headlineAccentWord: string;
   supportingCopy: string;
-  media: { src: string; alt: string; focalArea: string };
+  media: { src: string; alt: string; focalArea: string; mobileSrc?: string };
   sideMarkers: string[];
   sectionIndex: string;
 }

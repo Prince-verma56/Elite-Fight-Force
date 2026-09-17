@@ -117,15 +117,30 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
               label="hero-placeholder.jpg"
             />
           ) : (
-            <Image
-              src={hero.media.src}
-              alt={hero.media.alt}
-              fill
-              sizes="100vw"
-              className="object-cover"
-              style={{ objectPosition: "85% center" }}
-              priority
-            />
+            <>
+              {hero.media.mobileSrc && (
+                <Image
+                  src={hero.media.mobileSrc}
+                  alt={hero.media.alt}
+                  fill
+                  sizes="100vw"
+                  className="object-cover md:hidden block"
+                  style={{ objectPosition: "center 10%" }}
+                  priority
+                />
+              )}
+              <Image
+                src={hero.media.src}
+                alt={hero.media.alt}
+                fill
+                sizes="100vw"
+                className={`object-cover ${
+                  hero.media.mobileSrc ? "hidden md:block" : ""
+                }`}
+                style={{ objectPosition: "85% center" }}
+                priority
+              />
+            </>
           )}
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-fight-black via-fight-black/55 to-fight-black/20" />
@@ -134,23 +149,27 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
 
       <div
         data-hero-content
-        className="eff-container relative z-10 flex flex-1 flex-col gap-6 pt-24 pb-8 md:pt-28"
+        className="eff-container relative z-10 flex flex-1 flex-col gap-0 sm:gap-6 pt-24 pb-4 sm:pb-8 md:pt-28"
       >
         <div data-hero-fade className="flex items-center gap-3 text-off-white">
-          <span className="type-eyebrow">{hero.eyebrow}</span>
+          <span className="w-0.5 h-4 bg-blood-red" />
+          <span className="type-eyebrow font-bold tracking-[0.15em]">{hero.eyebrow}</span>
           <span className="h-3 w-px bg-off-white/30" />
-          <span className="type-eyebrow text-smoke">
+          <span className="type-eyebrow text-smoke tracking-[0.15em]">
             {hero.eyebrowSecondary}
           </span>
         </div>
 
-        <div className="flex flex-1 flex-col justify-center max-w-4xl">
-          <div className="flex flex-col gap-1 sm:gap-0">
+        <div className="flex flex-1 flex-col justify-end pb-4 sm:pb-0 sm:justify-center max-w-4xl mt-12 sm:mt-0">
+          <div className="flex flex-col gap-0 sm:gap-0">
+            <span data-hero-fade className="text-blood-red text-[9px] sm:text-xs font-bold tracking-[0.2em] mb-1 sm:mb-4 uppercase">
+              Elite Fight Force
+            </span>
             {hero.headline.map((word, i) => (
-              <div key={`${word}-${i}`} className="overflow-hidden pb-1 sm:pb-2">
+              <div key={`${word}-${i}`} className="overflow-hidden pb-0">
                 <div
                   data-hero-row
-                  className="font-heading text-[clamp(3rem,9vw,7.5rem)] leading-[0.95] tracking-normal uppercase text-off-white flex flex-wrap gap-[0.25em]"
+                  className="font-heading text-[clamp(2.75rem,11vw,7.5rem)] leading-[0.9] tracking-normal uppercase text-off-white flex flex-wrap gap-[0.25em]"
                 >
                   {word.split(" ").map((w, wIdx) => (
                     <span
@@ -169,43 +188,56 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
 
           <p
             data-hero-fade
-            className="type-body-lg mt-5 max-w-md text-off-white/85"
+            className="text-sm sm:type-body-lg mt-2 sm:mt-5 max-w-xs sm:max-w-md text-off-white/85"
           >
             {hero.supportingCopy}
           </p>
 
           <div
             data-hero-fade
-            className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5"
+            className="mt-4 sm:mt-8 flex flex-col items-start gap-3 sm:gap-6"
           >
             <CtaButton
               href="/free-trial"
-              className="w-full justify-center sm:w-auto sm:justify-start"
+              className="w-[280px] sm:w-[320px] justify-between sm:justify-between [clip-path:polygon(0_0,100%_0,calc(100%-1.5rem)_100%,0_100%)] pr-12 group"
             >
-              Book Your Free Trial
+              <span className="tracking-[0.1em] text-xs font-bold uppercase">Book Your Free Trial</span>
             </CtaButton>
-            <Link
-              href="/about"
-              className="type-label flex items-center gap-2 text-off-white/85 transition-colors hover:text-off-white"
-            >
-              Watch Our Story
-            </Link>
+            <div className="flex items-center gap-4">
+              <Link
+                href="/about"
+                className="group flex items-center gap-4 transition-colors hover:text-off-white text-off-white/85"
+              >
+                <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-off-white/30 group-hover:border-off-white/70 transition-colors">
+                  <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current ml-0.5" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+                <span className="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase">Watch Our Story</span>
+              </Link>
+              <span className="hidden sm:block h-px w-16 bg-off-white/30" />
+            </div>
           </div>
         </div>
 
         <div
           data-hero-fade
-          className="mt-auto flex items-end justify-between border-t border-off-white/15 pt-5"
+          className="mt-auto flex items-end justify-between pt-0 pb-4 sm:pt-5 sm:pb-5"
         >
-          <span className="type-label text-smoke">{hero.sectionIndex}</span>
-          <div className="hidden gap-6 md:flex">
-            {hero.sideMarkers.map((marker) => (
-              <span key={marker} className="type-label text-off-white/70">
-                {marker}
-              </span>
-            ))}
+          <div className="flex items-center gap-6">
+            <span className="type-label text-off-white font-bold tracking-widest">{hero.sectionIndex}</span>
+            <div className="flex items-center gap-2">
+              <span className="w-8 h-0.5 bg-blood-red" />
+              <span className="w-8 h-0.5 bg-off-white/20" />
+              <span className="w-8 h-0.5 bg-off-white/20" />
+            </div>
           </div>
-          <span className="type-label text-smoke">Scroll</span>
+          <div className="flex flex-col items-center gap-3 text-off-white">
+            <span className="type-label [writing-mode:vertical-rl] tracking-[0.3em] text-[10px]">SCROLL</span>
+            <svg className="w-3 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </div>
         </div>
       </div>
     </section>

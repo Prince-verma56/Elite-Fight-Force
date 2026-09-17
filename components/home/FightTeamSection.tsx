@@ -49,13 +49,13 @@ export function FightTeamSection({
           <TextReveal
             lines={content.headline}
             className="mt-4"
-            lineClassName="font-heading text-[5.5rem] md:text-[7rem] lg:text-[8.5rem] leading-[0.95] text-off-white tracking-normal uppercase pb-2"
+            lineClassName="font-heading text-[clamp(4rem,13vw,8.5rem)] leading-[0.95] text-off-white tracking-normal uppercase pb-2"
           />
           <SectionReveal delay={0.15}>
-            <p className="type-body-lg mt-6 max-w-md text-off-white/80">
+            <p className="text-sm sm:type-body-lg mt-4 sm:mt-6 max-w-md text-off-white/80">
               {content.copy}
             </p>
-            <CtaButton href="/fight-team" className="mt-8">
+            <CtaButton href="/fight-team" className="mt-6 sm:mt-8">
               {content.cta}
             </CtaButton>
           </SectionReveal>

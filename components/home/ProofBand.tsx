@@ -89,7 +89,7 @@ export function ProofBand({ stats }: { stats: ProofStat[] }) {
 
       <div
         ref={ref}
-        className="eff-container relative flex flex-wrap items-center justify-between gap-y-6"
+        className="eff-container relative grid grid-cols-2 gap-y-6 gap-x-4 sm:flex sm:flex-wrap sm:items-center sm:justify-between"
       >
         {stats.map((stat, i) => (
           <div key={stat.label} className="flex items-center">
