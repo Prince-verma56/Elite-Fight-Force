@@ -6,10 +6,10 @@
     "role": "Head Coach — Boxing",
     "disciplines": ["Boxing"],
     "record": "Fight Record: 12-4-0",
-    "image": "/media/coach-marcus.jpg",
+    "image": "/Images/Our Coaches/Coach Marcus-Boxing.png",
     "featured": true,
-    "source": "placeholder",
-    "notes": "Mock data — replace with client-verified coach profile before launch."
+    "source": "client",
+    "notes": "Updated with client image."
   },
   {
     "id": "coach-sarah",
@@ -18,10 +18,10 @@
     "role": "Muay Thai",
     "disciplines": ["Muay Thai"],
     "record": "Fight Record: 10-3-0",
-    "image": "/media/coach-sarah.jpg",
+    "image": "/Images/Our Coaches/Coach Sarah-Muay Thai.png",
     "featured": false,
-    "source": "placeholder",
-    "notes": "Mock data — replace with client-verified coach profile before launch."
+    "source": "client",
+    "notes": "Updated with client image."
   },
   {
     "id": "coach-daniel",
@@ -30,10 +30,10 @@
     "role": "MMA / BJJ",
     "disciplines": ["MMA", "Brazilian Jiu Jitsu"],
     "record": "Fight Record: 8-1-0",
-    "image": "/media/coach-daniel.jpg",
+    "image": "/Images/Our Coaches/Coach Daniel-MMA- BJJ.png",
     "featured": false,
-    "source": "placeholder",
-    "notes": "Mock data — replace with client-verified coach profile before launch."
+    "source": "client",
+    "notes": "Updated with client image."
   },
   {
     "id": "coach-jason",
@@ -42,9 +42,9 @@
     "role": "Strength & Conditioning",
     "disciplines": ["Strength & Conditioning"],
     "record": "10+ Years Experience",
-    "image": "/media/coach-jason.jpg",
+    "image": "/Images/Our Coaches/Coach Jason-Strength & Conditioning.png",
     "featured": false,
-    "source": "placeholder",
-    "notes": "Mock data — replace with client-verified coach profile before launch."
+    "source": "client",
+    "notes": "Updated with client image."
   }
 ]

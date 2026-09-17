@@ -1,7 +1,9 @@
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
 import { TextReveal } from "@/components/animation/TextReveal";
 import { SectionReveal } from "@/components/animation/SectionReveal";
-import { MaskReveal } from "@/components/animation/MaskReveal";
-import { MediaPlaceholder } from "@/components/media/MediaPlaceholder";
 import { CtaButton } from "@/components/ui/cta-button";
 import type { Coach } from "@/lib/content";
 
@@ -19,8 +21,7 @@ export function CoachesSection({
   coaches: CoachesContent;
   roster: Coach[];
 }) {
-  const featured = roster.find((c) => c.featured) ?? roster[0];
-  const secondary = roster.filter((c) => c.id !== featured.id);
+  const [active, setActive] = useState(0);
 
   return (
     <section className="bg-fight-black py-20 md:py-28 lg:py-32">
@@ -45,47 +46,94 @@ export function CoachesSection({
         </SectionReveal>
       </div>
 
-      <div className="eff-container mt-14 flex flex-col gap-4 md:mt-16 lg:flex-row lg:h-[560px]">
-        <MaskReveal className="relative h-[480px] w-full overflow-hidden lg:h-full lg:w-[45%]">
-          <MediaPlaceholder
-            alt={`${featured.name}, ${featured.role} at Elite Fight Force`}
-            aspect="h-full w-full"
-            className="h-full w-full"
-            label={featured.image.split("/").pop()}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-fight-black/90 via-transparent to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-            <span className="type-heading-lg block text-off-white">
-              {featured.name}
-            </span>
-            <span className="type-label mt-1 block text-blood-red">
-              {featured.role}
-            </span>
-            <span className="type-caption mt-2 block">{featured.record}</span>
-          </div>
-        </MaskReveal>
+      <div className="eff-container mt-14 md:mt-16">
+        <div 
+          className="hidden gap-2 md:flex md:h-[520px]"
+          onMouseLeave={() => setActive(0)}
+        >
+          {roster.map((coach, i) => {
+            const isActive = i === active;
+            return (
+              <button
+                key={coach.id}
+                onMouseEnter={() => setActive(i)}
+                onFocus={() => setActive(i)}
+                className="group relative h-full overflow-hidden transition-all duration-500 ease-out"
+                style={{ flex: isActive ? "2.4" : "1" }}
+                aria-label={`View ${coach.name}`}
+              >
+                <Image
+                  src={coach.image}
+                  alt={`${coach.name}, ${coach.role} at Elite Fight Force`}
+                  fill
+                  className={`object-cover transition-all duration-700 ${
+                    isActive ? "scale-100 grayscale-0 brightness-100" : "scale-105 grayscale-[0.7] brightness-[0.6]"
+                  }`}
+                />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-t from-fight-black/85 via-fight-black/10 to-transparent transition-opacity ${
+                    isActive ? "opacity-100" : "opacity-70"
+                  }`}
+                />
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6">
+                  <span
+                    className={`type-label transition-colors ${
+                      isActive ? "text-blood-red" : "text-smoke"
+                    }`}
+                  >
+                    0{i + 1}
+                  </span>
+                  {isActive ? (
+                    <div className="text-right">
+                      <span className="type-heading-md block text-off-white">
+                        {coach.name}
+                      </span>
+                      <span className="type-label block text-blood-red mt-1">
+                        {coach.role}
+                      </span>
+                    </div>
+                  ) : null}
+                </div>
+                {!isActive ? (
+                  <div className="absolute inset-0 flex flex-col items-center justify-end pb-[5.5rem]">
+                    <span className="type-label text-off-white/70 [writing-mode:vertical-lr] rotate-180 whitespace-nowrap tracking-widest">
+                      {coach.name}
+                    </span>
+                  </div>
+                ) : null}
+              </button>
+            );
+          })}
+        </div>
 
-        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3 lg:h-full lg:w-[55%]">
-          {secondary.map((coach, i) => (
-            <SectionReveal
+        {/* Mobile View */}
+        <div className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 md:hidden">
+          {roster.map((coach, i) => (
+            <div
               key={coach.id}
-              delay={i * 0.08}
-              className="relative aspect-[3/4] overflow-hidden sm:aspect-auto sm:h-[400px] lg:h-full"
+              className="relative aspect-[3/4] w-[62vw] shrink-0 snap-start overflow-hidden"
             >
-              <MediaPlaceholder
+              <Image
+                src={coach.image}
                 alt={`${coach.name}, ${coach.role} at Elite Fight Force`}
-                aspect="h-full w-full"
-                className="h-full w-full"
-                label={coach.image.split("/").pop()}
+                fill
+                className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-fight-black/90 via-transparent to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-4">
-                <span className="type-heading-md block text-off-white">
-                  {coach.name}
+              <div className="absolute inset-0 bg-gradient-to-t from-fight-black/85 via-transparent to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
+                <span className="type-label text-blood-red">
+                  0{i + 1}
                 </span>
-                <span className="type-caption mt-1 block">{coach.role}</span>
+                <div className="text-right">
+                  <span className="type-heading-md block text-off-white">
+                    {coach.name}
+                  </span>
+                  <span className="type-label block text-blood-red mt-1">
+                    {coach.role}
+                  </span>
+                </div>
               </div>
-            </SectionReveal>
+            </div>
           ))}
         </div>
       </div>

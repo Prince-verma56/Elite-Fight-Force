@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { getGsap, ScrollTrigger } from "@/lib/animations/gsap";
 import { easings } from "@/lib/animations/easings";
 
-interface SectionRevealProps {
+interface SectionRevealProps extends React.HTMLAttributes<HTMLElement> {
   children: ReactNode;
   className?: string;
   y?: number;
@@ -22,8 +22,9 @@ export function SectionReveal({
   duration = 0.9,
   delay = 0,
   as = "div",
+  ...props
 }: SectionRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
@@ -50,9 +51,9 @@ export function SectionReveal({
     { scope: ref }
   );
 
-  const Tag = as;
+  const Tag = as as any;
   return (
-    <Tag ref={ref} className={className}>
+    <Tag ref={ref} className={className} {...props}>
       {children}
     </Tag>
   );
