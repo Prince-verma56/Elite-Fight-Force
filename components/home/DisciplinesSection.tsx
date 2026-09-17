@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { TextReveal } from "@/components/animation/TextReveal";
 import { SectionReveal } from "@/components/animation/SectionReveal";
 import Image from "next/image";
@@ -69,6 +70,7 @@ export function DisciplinesSection({
                   src={item.image}
                   alt={`${item.name} training at Elite Fight Force`}
                   fill
+                  sizes="(min-width: 1280px) 60vw, (min-width: 768px) 70vw, 100vw"
                   className={`object-cover transition-all duration-700 ${
                     isActive ? "scale-100 grayscale-0 brightness-100" : "scale-105 grayscale-[0.7] brightness-[0.6]"
                   }`}
@@ -86,11 +88,20 @@ export function DisciplinesSection({
                   >
                     {item.index}
                   </span>
-                  {isActive ? (
-                    <span className="type-heading-md text-off-white">
-                      {item.name}
-                    </span>
-                  ) : null}
+                  <AnimatePresence mode="wait">
+                    {isActive ? (
+                      <motion.span
+                        key={item.slug}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.32, ease: "easeOut" }}
+                        className="type-heading-md text-off-white"
+                      >
+                        {item.name}
+                      </motion.span>
+                    ) : null}
+                  </AnimatePresence>
                 </div>
                 {!isActive ? (
                   <div className="absolute inset-0 flex flex-col items-center justify-end pb-[5.5rem]">
@@ -104,27 +115,26 @@ export function DisciplinesSection({
           })}
         </div>
 
-        <div className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 md:hidden">
+        <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 md:hidden">
           {disciplines.items.map((item) => (
             <div
               key={item.slug}
-              className="relative aspect-[3/4] w-[62vw] shrink-0 snap-start overflow-hidden"
+              className="relative aspect-[3/4] w-[68vw] shrink-0 snap-start overflow-hidden border border-off-white/10"
             >
               <Image
                 src={item.image}
                 alt={`${item.name} training at Elite Fight Force`}
                 fill
+                sizes="68vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-fight-black/85 via-transparent to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
-                <span className="type-label text-blood-red">
-                  {item.index}
-                </span>
-                <span className="type-heading-md text-off-white">
-                  {item.name}
-                </span>
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-fight-black/90 via-fight-black/10 to-transparent" />
+              <span className="type-label absolute left-4 top-4 text-blood-red">
+                {item.index}
+              </span>
+              <span className="type-heading-md absolute inset-x-4 bottom-4 text-off-white">
+                {item.name}
+              </span>
             </div>
           ))}
         </div>

@@ -22,12 +22,13 @@ export function PhilosophySection({
   philosophy: PhilosophyContent;
 }) {
   return (
-    <section className="relative flex min-h-[clamp(700px,85vh,1000px)] flex-col overflow-hidden py-16 md:py-20 lg:py-24">
+    <section className="relative flex flex-col overflow-hidden py-14 md:py-20 lg:min-h-[clamp(700px,85vh,1000px)] lg:py-24">
       <div className="absolute inset-0 z-0">
         <Image
           src="/Images/Bg Images/MoreThanAGym03.png"
           alt="More Than A Gym"
           fill
+          sizes="100vw"
           className="object-cover"
           style={{ objectPosition: "85% center" }}
         />
@@ -37,8 +38,8 @@ export function PhilosophySection({
       <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/70 via-white/20 to-transparent backdrop-blur-lg [mask-image:linear-gradient(to_right,black_40%,transparent_75%)]" />
 
       <div className="eff-container relative z-10 flex w-full flex-1 flex-col">
-        {/* Main Content (Centered Vertically) */}
-        <div className="flex max-w-3xl flex-1 flex-col justify-center py-8">
+        {/* Main Content (Centered Vertically on desktop) */}
+        <div className="flex max-w-3xl flex-1 flex-col justify-center py-2 lg:py-8">
           <div>
             <SectionReveal>
               <span className="type-eyebrow text-blood-red">
@@ -66,8 +67,8 @@ export function PhilosophySection({
           </div>
         </div>
 
-        {/* Values Grid (Pushed to bottom) */}
-        <SectionReveal delay={0.25} className="mt-12 w-full max-w-3xl lg:mt-16">
+        {/* Values Grid (Pushed to bottom on desktop) */}
+        <SectionReveal delay={0.25} className="mt-8 w-full max-w-3xl lg:mt-16">
           <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-fight-black/15 pt-8 sm:grid-cols-4 sm:gap-x-4 lg:gap-x-8">
             {philosophy.values.map((value, idx) => (
               <div 

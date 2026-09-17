@@ -24,6 +24,7 @@ export function LocationSection({ location }: { location: LocationContent }) {
           src="/Images/Bg Images/OurLocationBg.png"
           alt="Our Location background"
           fill
+          sizes="100vw"
           className="object-cover object-center"
         />
       </div>
@@ -61,10 +62,37 @@ export function LocationSection({ location }: { location: LocationContent }) {
           delay={0.1}
           className="relative aspect-[4/3] overflow-hidden border border-line/70 lg:aspect-auto"
         >
-          <div className="absolute inset-0 flex items-center justify-center bg-carbon">
+          <Image
+            src="/Images/Bg Images/OurLocationBg.png"
+            alt="Elite Fight Force neighborhood in Sefton, NSW"
+            fill
+            sizes="(min-width: 1024px) 33vw, 100vw"
+            className="object-cover object-center saturate-[0.35] contrast-125"
+          />
+          <div className="absolute inset-0 bg-fight-black/55" />
+          <div
+            className="absolute inset-0 opacity-[0.15] mix-blend-overlay"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(0deg, rgba(247,245,240,0.5) 0, rgba(247,245,240,0.5) 1px, transparent 1px, transparent 32px), repeating-linear-gradient(90deg, rgba(247,245,240,0.5) 0, rgba(247,245,240,0.5) 1px, transparent 1px, transparent 32px)",
+            }}
+            aria-hidden
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <MapPin className="mx-auto size-8 text-blood-red" aria-hidden />
-              <span className="type-label mt-2 block text-smoke">
+              <span className="relative mx-auto flex size-8 items-center justify-center">
+                <span
+                  data-location-pin-ping
+                  className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blood-red/50"
+                />
+                <MapPin
+                  className="relative size-7 text-blood-red drop-shadow-[0_2px_6px_rgba(0,0,0,0.5)]"
+                  fill="currentColor"
+                  fillOpacity={0.15}
+                  aria-hidden
+                />
+              </span>
+              <span className="type-label mt-3 block text-off-white">
                 Sefton, NSW
               </span>
             </div>

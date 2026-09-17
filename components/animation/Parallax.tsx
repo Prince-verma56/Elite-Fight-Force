@@ -39,7 +39,7 @@ export function Parallax({ children, className, strength = 60 }: ParallaxProps) 
   );
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={`relative ${className ?? ""}`}>
       {children}
     </div>
   );

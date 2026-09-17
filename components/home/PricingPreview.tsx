@@ -1,6 +1,13 @@
+"use client";
+
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { TextReveal } from "@/components/animation/TextReveal";
 import { SectionReveal } from "@/components/animation/SectionReveal";
 import { CtaButton } from "@/components/ui/cta-button";
+import { getGsap, ScrollTrigger } from "@/lib/animations/gsap";
+import { easings } from "@/lib/animations/easings";
+import { prefersReducedMotion } from "@/lib/animations/reduced-motion";
 import type { PricingPlan } from "@/lib/content";
 
 interface PricingContent {
@@ -15,6 +22,48 @@ export function PricingPreview({
   pricing: PricingContent;
   plans: PricingPlan[];
 }) {
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!gridRef.current || prefersReducedMotion()) return;
+      const gsap = getGsap();
+      const featured =
+        gridRef.current.querySelector<HTMLElement>("[data-plan-featured]");
+      if (!featured) return;
+
+      const restScale = window.matchMedia("(min-width: 768px)").matches
+        ? 1.06
+        : 1;
+      const glow = featured.querySelector<HTMLElement>("[data-plan-glow]");
+      gsap.set(featured, { scale: restScale * 0.94 });
+      if (glow) gsap.set(glow, { opacity: 0 });
+
+      ScrollTrigger.create({
+        trigger: gridRef.current,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          gsap.to(featured, {
+            scale: restScale,
+            duration: 0.9,
+            delay: 0.32,
+            ease: easings.out4,
+          });
+          if (glow) {
+            gsap.to(glow, {
+              opacity: 1,
+              duration: 1.1,
+              delay: 0.4,
+              ease: easings.out2,
+            });
+          }
+        },
+      });
+    },
+    { scope: gridRef }
+  );
+
   return (
     <section className="bg-off-white py-20 md:py-28">
       <div className="eff-container">
@@ -31,27 +80,42 @@ export function PricingPreview({
           />
         </div>
 
-        <div className="mt-14 grid grid-cols-1 divide-y divide-fight-black/12 border-t border-b border-fight-black/12 md:grid-cols-3 md:divide-x md:divide-y-0">
+        <div
+          ref={gridRef}
+          className="mt-14 grid grid-cols-1 divide-y divide-fight-black/12 border-t border-b border-fight-black/12 md:grid-cols-3 md:divide-x md:divide-y-0"
+        >
           {plans.map((plan, i) => (
             <SectionReveal
               key={plan.id}
               delay={i * 0.08}
+              data-plan-featured={plan.featured ? "" : undefined}
               className={`relative px-6 py-10 md:px-8 ${
-                plan.featured ? "bg-fight-black text-off-white" : ""
+                plan.featured
+                  ? "z-10 origin-center bg-fight-black text-off-white motion-reduce:md:scale-[1.06] md:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.35)]"
+                  : ""
               }`}
             >
-              {plan.badge ? (
-                <span className="type-label absolute right-6 top-8 text-blood-red">
-                  {plan.badge}
-                </span>
+              {plan.featured ? (
+                <span
+                  data-plan-glow
+                  className="pointer-events-none absolute -inset-x-6 -top-10 h-24 rounded-full bg-blood-red/25 blur-3xl"
+                  aria-hidden
+                />
               ) : null}
-              <h3
-                className={`type-label ${
-                  plan.featured ? "text-smoke" : "text-fight-black/50"
-                }`}
-              >
-                {plan.name}
-              </h3>
+              <div className="flex items-center justify-between gap-3">
+                <h3
+                  className={`type-label ${
+                    plan.featured ? "text-smoke" : "text-fight-black/50"
+                  }`}
+                >
+                  {plan.name}
+                </h3>
+                {plan.badge ? (
+                  <span className="type-label shrink-0 whitespace-nowrap text-blood-red">
+                    {plan.badge}
+                  </span>
+                ) : null}
+              </div>
               <div className="mt-4 flex items-baseline gap-2">
                 <span
                   className={`type-display-md ${

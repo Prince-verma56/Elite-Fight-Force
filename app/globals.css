@@ -413,3 +413,32 @@ html.lenis {
 .animate-marquee {
   animation: marquee 25s linear infinite;
 }
+
+/* ==========================================================================
+   HERO PRE-ANIMATE STATE
+   Applied in markup so the entrance state is painted on the very first
+   frame — GSAP only ever reveals from here, it never has to hide first.
+   Removed by JS once the reveal timeline is armed.
+   ========================================================================== */
+
+.hero-pre-animate [data-hero-row] {
+  transform: translateY(115%);
+}
+
+.hero-pre-animate [data-hero-fade] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.hero-pre-animate [data-hero-media-inner] {
+  transform: scale(1.18);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-pre-animate [data-hero-row],
+  .hero-pre-animate [data-hero-fade],
+  .hero-pre-animate [data-hero-media-inner] {
+    transform: none;
+    opacity: 1;
+  }
+}

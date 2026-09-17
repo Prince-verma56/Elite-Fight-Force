@@ -52,6 +52,7 @@ export function ReviewsSection({
           src="/Images/Bg Images/TestimonialsBg.png"
           alt="Testimonials background"
           fill
+          sizes="100vw"
           className="object-cover object-center"
         />
       </div>
@@ -92,6 +93,7 @@ export function ReviewsSection({
                       src={active.image}
                       alt={active.name}
                       fill
+                      sizes="320px"
                       className="object-cover grayscale transition-all duration-700 hover:scale-105 hover:grayscale-0"
                     />
                   </div>
@@ -119,22 +121,22 @@ export function ReviewsSection({
             </AnimatePresence>
           </div>
 
-          <div className="mt-10 flex items-center gap-4 border-t border-fight-black/10 pt-6">
+          <div className="mt-10 flex items-center gap-3 border-t border-fight-black/10 pt-6">
             <button
               onClick={prev}
               aria-label="Previous review"
-              className="flex size-10 items-center justify-center border border-fight-black/20 text-fight-black transition-colors hover:border-fight-black"
+              className="flex size-11 items-center justify-center bg-fight-black text-off-white shadow-md transition-colors hover:bg-blood-red"
             >
               <ChevronLeft className="size-4" />
             </button>
             <button
               onClick={next}
               aria-label="Next review"
-              className="flex size-10 items-center justify-center border border-fight-black/20 text-fight-black transition-colors hover:border-fight-black"
+              className="flex size-11 items-center justify-center bg-fight-black text-off-white shadow-md transition-colors hover:bg-blood-red"
             >
               <ChevronRight className="size-4" />
             </button>
-            <span className="type-caption ml-2">
+            <span className="type-caption ml-2 text-fight-black/70">
               {String(index + 1).padStart(2, "0")} /{" "}
               {String(items.length).padStart(2, "0")}
             </span>

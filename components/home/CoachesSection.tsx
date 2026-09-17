@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { AnimatePresence, motion } from "motion/react";
 import { TextReveal } from "@/components/animation/TextReveal";
 import { SectionReveal } from "@/components/animation/SectionReveal";
 import { CtaButton } from "@/components/ui/cta-button";
@@ -66,6 +67,7 @@ export function CoachesSection({
                   src={coach.image}
                   alt={`${coach.name}, ${coach.role} at Elite Fight Force`}
                   fill
+                  sizes="(min-width: 1280px) 60vw, (min-width: 768px) 70vw, 100vw"
                   className={`object-cover transition-all duration-700 ${
                     isActive ? "scale-100 grayscale-0 brightness-100" : "scale-105 grayscale-[0.7] brightness-[0.6]"
                   }`}
@@ -83,16 +85,25 @@ export function CoachesSection({
                   >
                     0{i + 1}
                   </span>
-                  {isActive ? (
-                    <div className="text-right">
-                      <span className="type-heading-md block text-off-white">
-                        {coach.name}
-                      </span>
-                      <span className="type-label block text-blood-red mt-1">
-                        {coach.role}
-                      </span>
-                    </div>
-                  ) : null}
+                  <AnimatePresence mode="wait">
+                    {isActive ? (
+                      <motion.div
+                        key={coach.id}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.32, ease: "easeOut" }}
+                        className="text-right"
+                      >
+                        <span className="type-heading-md block text-off-white">
+                          {coach.name}
+                        </span>
+                        <span className="type-label block text-blood-red mt-1">
+                          {coach.role}
+                        </span>
+                      </motion.div>
+                    ) : null}
+                  </AnimatePresence>
                 </div>
                 {!isActive ? (
                   <div className="absolute inset-0 flex flex-col items-center justify-end pb-[5.5rem]">
@@ -107,31 +118,30 @@ export function CoachesSection({
         </div>
 
         {/* Mobile View */}
-        <div className="-mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-2 md:hidden">
+        <div className="-mx-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-3 md:hidden">
           {roster.map((coach, i) => (
             <div
               key={coach.id}
-              className="relative aspect-[3/4] w-[62vw] shrink-0 snap-start overflow-hidden"
+              className="relative aspect-[3/4] w-[68vw] shrink-0 snap-start overflow-hidden border border-off-white/10"
             >
               <Image
                 src={coach.image}
                 alt={`${coach.name}, ${coach.role} at Elite Fight Force`}
                 fill
+                sizes="68vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-fight-black/85 via-transparent to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-4">
-                <span className="type-label text-blood-red">
-                  0{i + 1}
+              <div className="absolute inset-0 bg-gradient-to-t from-fight-black/90 via-fight-black/10 to-transparent" />
+              <span className="type-label absolute left-4 top-4 text-blood-red">
+                0{i + 1}
+              </span>
+              <div className="absolute inset-x-4 bottom-4 text-right">
+                <span className="type-heading-md block text-off-white">
+                  {coach.name}
                 </span>
-                <div className="text-right">
-                  <span className="type-heading-md block text-off-white">
-                    {coach.name}
-                  </span>
-                  <span className="type-label block text-blood-red mt-1">
-                    {coach.role}
-                  </span>
-                </div>
+                <span className="type-label mt-1 block text-blood-red">
+                  {coach.role}
+                </span>
               </div>
             </div>
           ))}

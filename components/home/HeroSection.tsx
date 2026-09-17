@@ -27,14 +27,13 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
         "[data-hero-fade]"
       );
 
-      if (reduced) {
-        gsap.set(rows ?? [], { y: "0%" });
-        gsap.set(fadeEls ?? [], { opacity: 1, y: 0 });
-        gsap.set(mediaInnerRef.current, { scale: 1 });
-        return;
-      }
+      // The hero starts in its hidden state via the `.hero-pre-animate` CSS
+      // class (applied in markup) so nothing flashes fully-visible before
+      // GSAP takes over; this always removes it, reduced-motion or not.
+      rootRef.current?.classList.remove("hero-pre-animate");
 
-      gsap.set(mediaRef.current, { clipPath: "inset(0% 0% 0% 0%)" });
+      if (reduced) return;
+
       gsap.set(mediaInnerRef.current, { scale: 1.18 });
       gsap.set(rows ?? [], { y: "115%" });
       gsap.set(fadeEls ?? [], { opacity: 0, y: 16 });
@@ -98,14 +97,18 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
   return (
     <section
       ref={rootRef}
-      className="relative flex min-h-screen flex-col bg-fight-black lg:min-h-[clamp(760px,95vh,1000px)]"
+      className="hero-pre-animate relative flex min-h-dvh flex-col bg-fight-black lg:min-h-[clamp(700px,92dvh,980px)]"
     >
       <div
         ref={mediaRef}
         className="absolute inset-0 overflow-hidden"
         style={{ clipPath: "inset(0% 0% 0% 0%)" }}
       >
-        <div ref={mediaInnerRef} className="h-full w-full relative">
+        <div
+          ref={mediaInnerRef}
+          data-hero-media-inner
+          className="h-full w-full relative"
+        >
           {hero.media.src.includes("placeholder") ? (
             <MediaPlaceholder
               alt={hero.media.alt}
@@ -118,6 +121,7 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
               src={hero.media.src}
               alt={hero.media.alt}
               fill
+              sizes="100vw"
               className="object-cover"
               style={{ objectPosition: "85% center" }}
               priority
@@ -130,7 +134,7 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
 
       <div
         data-hero-content
-        className="eff-container relative z-10 flex flex-1 flex-col gap-8 pt-28 pb-10 md:pt-32"
+        className="eff-container relative z-10 flex flex-1 flex-col gap-6 pt-24 pb-8 md:pt-28"
       >
         <div data-hero-fade className="flex items-center gap-3 text-off-white">
           <span className="type-eyebrow">{hero.eyebrow}</span>
@@ -140,13 +144,13 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
           </span>
         </div>
 
-        <div className="mt-8 max-w-4xl md:mt-10">
+        <div className="flex flex-1 flex-col justify-center max-w-4xl">
           <div className="flex flex-col gap-1 sm:gap-0">
             {hero.headline.map((word, i) => (
               <div key={`${word}-${i}`} className="overflow-hidden pb-1 sm:pb-2">
                 <div
                   data-hero-row
-                  className="font-heading text-[5.5rem] md:text-[7rem] lg:text-[8.5rem] leading-[0.95] tracking-normal uppercase text-off-white flex flex-wrap gap-[0.25em]"
+                  className="font-heading text-[clamp(3rem,9vw,7.5rem)] leading-[0.95] tracking-normal uppercase text-off-white flex flex-wrap gap-[0.25em]"
                 >
                   {word.split(" ").map((w, wIdx) => (
                     <span
@@ -165,13 +169,19 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
 
           <p
             data-hero-fade
-            className="type-body-lg mt-6 max-w-md text-off-white/85"
+            className="type-body-lg mt-5 max-w-md text-off-white/85"
           >
             {hero.supportingCopy}
           </p>
 
-          <div data-hero-fade className="mt-8 flex flex-wrap items-center gap-5">
-            <CtaButton href="/free-trial">
+          <div
+            data-hero-fade
+            className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-5"
+          >
+            <CtaButton
+              href="/free-trial"
+              className="w-full justify-center sm:w-auto sm:justify-start"
+            >
               Book Your Free Trial
             </CtaButton>
             <Link
@@ -185,7 +195,7 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
 
         <div
           data-hero-fade
-          className="mt-10 flex items-end justify-between border-t border-off-white/15 pt-5"
+          className="mt-auto flex items-end justify-between border-t border-off-white/15 pt-5"
         >
           <span className="type-label text-smoke">{hero.sectionIndex}</span>
           <div className="hidden gap-6 md:flex">

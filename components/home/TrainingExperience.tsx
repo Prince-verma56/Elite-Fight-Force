@@ -1,10 +1,15 @@
 "use client";
 
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import { TextReveal } from "@/components/animation/TextReveal";
 import { SectionReveal } from "@/components/animation/SectionReveal";
 import { Play } from "lucide-react";
 import { Carousel_006 } from "@/components/ui/skiper-ui/skiper54";
 import Image from "next/image";
+import { getGsap, ScrollTrigger } from "@/lib/animations/gsap";
+import { easings } from "@/lib/animations/easings";
+import { prefersReducedMotion } from "@/lib/animations/reduced-motion";
 
 interface InsideEffContent {
   eyebrow: string;
@@ -20,19 +25,80 @@ export function TrainingExperience({
 }: {
   insideEff: InsideEffContent;
 }) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const panelsRef = useRef<HTMLDivElement>(null);
+
   const carouselImages = insideEff.panels.map((src, index) => ({
     src,
     alt: `Elite Fight Force Training Experience ${index + 1}`,
     title: `Effort & Discipline ${index + 1}`
   }));
 
+  useGSAP(
+    () => {
+      if (!rootRef.current || prefersReducedMotion()) return;
+      const gsap = getGsap();
+
+      // Signature-scene depth: background drifts slowly behind the panels,
+      // never rotating — a slow scale/parallax read as distance.
+      if (bgRef.current) {
+        gsap.fromTo(
+          bgRef.current,
+          { scale: 1.08, yPercent: -4 },
+          {
+            scale: 1.18,
+            yPercent: 4,
+            ease: "none",
+            scrollTrigger: {
+              trigger: rootRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      // Panels arrive from depth (perspective push) after copy settles.
+      if (panelsRef.current) {
+        gsap.set(panelsRef.current, {
+          y: 60,
+          scale: 0.94,
+          opacity: 0,
+          transformPerspective: 1000,
+        });
+
+        ScrollTrigger.create({
+          trigger: panelsRef.current,
+          start: "top 88%",
+          once: true,
+          onEnter: () => {
+            gsap.to(panelsRef.current, {
+              y: 0,
+              scale: 1,
+              opacity: 1,
+              duration: 1.2,
+              ease: easings.out4,
+            });
+          },
+        });
+      }
+    },
+    { scope: rootRef }
+  );
+
   return (
-    <section className="relative overflow-hidden bg-fight-black py-24 md:py-32 lg:min-h-[clamp(800px,105vh,1100px)] lg:py-40">
-      <div className="absolute inset-0 z-0">
+    <section
+      ref={rootRef}
+      className="relative overflow-hidden bg-fight-black py-24 md:py-32 lg:min-h-[clamp(800px,105vh,1100px)] lg:py-40"
+    >
+      <div ref={bgRef} className="absolute inset-0 z-0">
         <Image
           src="/Images/Bg Images/RealPeopleRealWorkBg.png"
           alt="Inside Elite Fight Force"
           fill
+          sizes="100vw"
           className="object-cover opacity-50"
           style={{ objectPosition: "center top" }}
         />
@@ -40,7 +106,7 @@ export function TrainingExperience({
 
       {/* Strong dark glassmorphism overlay for a minimal, blurred background effect */}
       <div className="absolute inset-0 z-0 bg-fight-black/80 backdrop-blur-[12px]" />
-      
+
       <div className="eff-container relative flex flex-col items-center text-center">
         <SectionReveal>
           <span className="type-eyebrow text-blood-red">
@@ -70,10 +136,10 @@ export function TrainingExperience({
           </button>
         </SectionReveal>
 
-        <SectionReveal delay={0.35} className="mt-16 w-full lg:mt-20">
+        <div ref={panelsRef} className="mt-16 w-full lg:mt-20">
           <div className="mx-auto flex h-[500px] w-full max-w-[1400px] items-center justify-center">
-            <Carousel_006 
-              images={carouselImages} 
+            <Carousel_006
+              images={carouselImages}
               className="w-full"
               showPagination={true}
               showNavigation={true}
@@ -81,7 +147,7 @@ export function TrainingExperience({
               autoplay={true}
             />
           </div>
-        </SectionReveal>
+        </div>
 
         <div className="mt-16 hidden gap-10 lg:flex">
           {insideEff.sideMarkers.map((marker) => (

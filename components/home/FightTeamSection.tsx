@@ -30,6 +30,7 @@ export function FightTeamSection({
             src="/Images/Bg Images/Our Fight Team.png"
             alt="Elite Fight Force competition team"
             fill
+            sizes="100vw"
             className="object-cover object-[center_30%]"
             priority
           />

@@ -66,6 +66,7 @@ export function FinalCTASection({ finalCta }: { finalCta: FinalCtaContent }) {
           src="/Images/Bg Images/FinalCTABg.png"
           alt="Fighter training at Elite Fight Force, final call to action"
           fill
+          sizes="100vw"
           className="object-cover object-center"
         />
       </div>

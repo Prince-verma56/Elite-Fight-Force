@@ -1,6 +1,12 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
+import { useGSAP } from "@gsap/react";
 import { SectionReveal } from "@/components/animation/SectionReveal";
 import { CtaButton } from "@/components/ui/cta-button";
+import { getGsap, ScrollTrigger } from "@/lib/animations/gsap";
+import { easings } from "@/lib/animations/easings";
 import type { FightResult } from "@/lib/content";
 
 export function RecentFightsSection({
@@ -10,14 +16,46 @@ export function RecentFightsSection({
   results: FightResult[];
   quote: string;
 }) {
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(
+    () => {
+      if (!rootRef.current) return;
+      const gsap = getGsap();
+      const line = rootRef.current.querySelector("[data-fight-line]");
+      if (!line) return;
+
+      gsap.set(line, { scaleX: 0 });
+
+      ScrollTrigger.create({
+        trigger: rootRef.current,
+        start: "top 75%",
+        once: true,
+        onEnter: () => {
+          gsap.to(line, {
+            scaleX: 1,
+            duration: 0.7,
+            delay: 0.5,
+            ease: easings.out3,
+          });
+        },
+      });
+    },
+    { scope: rootRef }
+  );
+
   return (
-    <section className="relative flex items-center min-h-[85vh] overflow-hidden bg-fight-black py-20 lg:min-h-[clamp(760px,95vh,960px)] lg:py-28">
+    <section
+      ref={rootRef}
+      className="relative flex items-center min-h-[85vh] overflow-hidden bg-fight-black py-20 lg:min-h-[clamp(760px,95vh,960px)] lg:py-28"
+    >
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/Images/Bg Images/LandingPageBg.png"
           alt="Recent Fights Background"
           fill
+          sizes="100vw"
           className="object-cover object-right opacity-60 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-fight-black via-fight-black/60 to-transparent" />
@@ -75,8 +113,12 @@ export function RecentFightsSection({
 
         {/* Right Side: Floating Quote */}
         <div className="hidden lg:flex h-full w-full items-center justify-center lg:justify-end">
-          <SectionReveal delay={0.3} className="relative z-10">
-            <p className="font-heading text-5xl md:text-7xl lg:text-[6rem] leading-[0.9] text-off-white/90 transform -rotate-2 max-w-sm text-right pr-12">
+          <SectionReveal delay={0.3} className="relative z-10 pr-12">
+            <span
+              data-fight-line
+              className="mb-4 ml-auto block h-px w-16 origin-right bg-blood-red/70"
+            />
+            <p className="font-heading text-5xl md:text-7xl lg:text-[6rem] leading-[0.9] text-off-white/90 transform -rotate-2 max-w-sm text-right">
               SAME GYM.<br />
               DIFFERENT<br />
               <span className="text-blood-red">LEVEL.</span>

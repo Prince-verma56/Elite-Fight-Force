@@ -13,6 +13,7 @@ export function Footer() {
           src="/Images/Bg Images/FooterBg.png"
           alt="Footer background"
           fill
+          sizes="100vw"
           className="object-cover object-center"
         />
         {/* Minimalistic Subtle Red Fog */}

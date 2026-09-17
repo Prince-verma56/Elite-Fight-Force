@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { getGsap, ScrollTrigger } from "@/lib/animations/gsap";
 import { easings } from "@/lib/animations/easings";
+import { prefersReducedMotion } from "@/lib/animations/reduced-motion";
 
 interface ProofStat {
   value: string;
@@ -19,6 +20,9 @@ export function ProofBand({ stats }: { stats: ProofStat[] }) {
       const gsap = getGsap();
       const items = ref.current.querySelectorAll("[data-proof-item]");
       const rules = ref.current.querySelectorAll("[data-proof-rule]");
+      const counters =
+        ref.current.querySelectorAll<HTMLElement>("[data-proof-value]");
+      const reduced = prefersReducedMotion();
 
       gsap.set(items, { opacity: 0, y: 14 });
       gsap.set(rules, { scaleY: 0 });
@@ -41,6 +45,27 @@ export function ProofBand({ stats }: { stats: ProofStat[] }) {
             stagger: 0.08,
             ease: easings.out2,
           });
+
+          if (reduced) return;
+
+          counters.forEach((el, i) => {
+            const raw = el.dataset.proofValue ?? "";
+            const match = raw.match(/^(\d+)(.*)$/);
+            if (!match) return;
+            const [, digits, suffix] = match;
+            const target = Number(digits);
+            const counter = { val: 0 };
+
+            gsap.to(counter, {
+              val: target,
+              duration: 1.1,
+              delay: 0.15 + i * 0.08,
+              ease: easings.out3,
+              onUpdate: () => {
+                el.textContent = `${Math.round(counter.val)}${suffix}`;
+              },
+            });
+          });
         },
       });
     },
@@ -48,10 +73,23 @@ export function ProofBand({ stats }: { stats: ProofStat[] }) {
   );
 
   return (
-    <section className="bg-bone py-7 md:py-9">
+    <section className="relative overflow-hidden bg-bone py-7 md:py-9">
+      <div
+        className="pointer-events-none absolute -left-16 top-1/2 h-40 w-64 -translate-y-1/2 rounded-full bg-blood-red/[0.07] blur-[90px]"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(115deg, rgba(9,10,9,0.5) 0, rgba(9,10,9,0.5) 1px, transparent 1px, transparent 15px)",
+        }}
+        aria-hidden
+      />
+
       <div
         ref={ref}
-        className="eff-container flex flex-wrap items-center justify-between gap-y-6"
+        className="eff-container relative flex flex-wrap items-center justify-between gap-y-6"
       >
         {stats.map((stat, i) => (
           <div key={stat.label} className="flex items-center">
@@ -62,7 +100,12 @@ export function ProofBand({ stats }: { stats: ProofStat[] }) {
               />
             ) : null}
             <div data-proof-item className="min-w-[110px]">
-              <div className="type-stat text-fight-black">{stat.value}</div>
+              <div
+                data-proof-value={stat.value}
+                className="type-stat text-fight-black"
+              >
+                {stat.value}
+              </div>
               <div className="type-label mt-1 text-fight-black/60">
                 {stat.label}
               </div>
