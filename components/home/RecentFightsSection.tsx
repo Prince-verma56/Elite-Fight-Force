@@ -47,7 +47,7 @@ export function RecentFightsSection({
   return (
     <section
       ref={rootRef}
-      className="relative flex items-center min-h-[85vh] overflow-hidden bg-fight-black py-20 lg:min-h-[clamp(760px,95vh,960px)] lg:py-28"
+      className="relative flex items-center min-h-[85dvh] overflow-hidden bg-fight-black py-20 lg:min-h-[clamp(760px,95vh,960px)] lg:py-28"
     >
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">

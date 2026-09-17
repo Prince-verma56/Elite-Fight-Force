@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/site-config";
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-fight-black pt-20 lg:pt-32 pb-8 lg:pb-12 text-off-white min-h-[60vh] flex flex-col justify-end">
+    <footer className="relative overflow-hidden bg-fight-black pt-16 lg:pt-32 pb-8 lg:pb-12 text-off-white flex flex-col justify-end lg:min-h-[60dvh]">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image

@@ -4,6 +4,7 @@ import { useRef, type ReactNode } from "react";
 import { useGSAP } from "@gsap/react";
 import { getGsap, ScrollTrigger } from "@/lib/animations/gsap";
 import { easings } from "@/lib/animations/easings";
+import { prefersReducedMotion } from "@/lib/animations/reduced-motion";
 
 interface MaskRevealProps {
   children: ReactNode;
@@ -23,6 +24,7 @@ export function MaskReveal({
   useGSAP(
     () => {
       if (!wrapRef.current || !innerRef.current) return;
+      if (prefersReducedMotion()) return;
       const gsap = getGsap();
 
       const clipFrom =

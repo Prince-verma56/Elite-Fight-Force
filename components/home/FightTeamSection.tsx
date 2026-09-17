@@ -23,7 +23,7 @@ export function FightTeamSection({
   results: FightResult[];
 }) {
   return (
-    <section className="relative min-h-[85vh] overflow-hidden bg-fight-black lg:min-h-[clamp(760px,95vh,960px)]">
+    <section className="relative min-h-[85dvh] overflow-hidden bg-fight-black lg:min-h-[clamp(760px,95vh,960px)]">
       <div className="absolute inset-0">
         <Parallax strength={50} className="h-full w-full">
           <Image
@@ -32,14 +32,13 @@ export function FightTeamSection({
             fill
             sizes="100vw"
             className="object-cover object-[center_30%]"
-            priority
           />
         </Parallax>
         <div className="absolute inset-0 bg-gradient-to-r from-fight-black via-fight-black/70 to-fight-black/10" />
         <div className="absolute inset-0 bg-gradient-to-t from-fight-black via-transparent to-fight-black/50" />
       </div>
 
-      <div className="eff-container relative z-10 flex min-h-[85vh] flex-col justify-center py-20 lg:min-h-[clamp(760px,95vh,960px)] lg:py-28">
+      <div className="eff-container relative z-10 flex min-h-[85dvh] flex-col justify-center py-20 lg:min-h-[clamp(760px,95vh,960px)] lg:py-28">
         <div className="max-w-xl">
           <SectionReveal>
             <span className="type-eyebrow text-blood-red">

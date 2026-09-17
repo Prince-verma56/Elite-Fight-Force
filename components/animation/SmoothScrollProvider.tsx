@@ -8,6 +8,10 @@ import { prefersReducedMotion } from "@/lib/animations/reduced-motion";
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (prefersReducedMotion()) return;
+    // Coarse-pointer (touch) devices already get well-tuned native momentum
+    // scrolling; layering Lenis on top there fights the OS scroll physics
+    // and is the primary source of scroll jank on phones.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const gsap = getGsap();
     const lenis = new Lenis({
@@ -17,12 +21,14 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    const update = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
+    gsap.ticker.add(update);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(update);
       lenis.destroy();
     };
   }, []);

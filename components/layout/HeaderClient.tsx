@@ -3,9 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, Phone } from "lucide-react";
-import { useGSAP } from "@gsap/react";
-import { getGsap } from "@/lib/animations/gsap";
-import { easings } from "@/lib/animations/easings";
 import {
   Sheet,
   SheetContent,
@@ -31,7 +28,6 @@ export function HeaderClient({
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
-  const barRef = useRef<HTMLDivElement>(null);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -53,28 +49,15 @@ export function HeaderClient({
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useGSAP(
-    () => {
-      if (!barRef.current) return;
-      const gsap = getGsap();
-      gsap.to(barRef.current, {
-        yPercent: hidden ? -100 : 0,
-        backgroundColor: scrolled ? "rgba(9,10,9,0.86)" : "rgba(9,10,9,0)",
-        backdropFilter: scrolled ? "blur(10px)" : "blur(0px)",
-        borderColor: scrolled ? "rgba(247,245,240,0.1)" : "rgba(247,245,240,0)",
-        paddingTop: scrolled ? "10px" : "16px",
-        paddingBottom: scrolled ? "10px" : "16px",
-        duration: 0.45,
-        ease: easings.out3,
-      });
-    },
-    { dependencies: [scrolled, hidden] }
-  );
-
   return (
     <header
-      ref={barRef}
-      className="fixed inset-x-0 top-0 z-50 border-b border-transparent px-5 py-4 md:px-8 lg:px-12"
+      className={`fixed inset-x-0 top-0 z-50 border-b px-5 py-4 transition-[transform,background-color,border-color,backdrop-filter,padding] duration-450 ease-out will-change-transform md:px-8 lg:px-12 ${
+        hidden ? "-translate-y-full" : "translate-y-0"
+      } ${
+        scrolled
+          ? "border-off-white/10 bg-fight-black/86 py-2.5 backdrop-blur-md"
+          : "border-transparent bg-fight-black/0 py-4 backdrop-blur-0"
+      }`}
     >
       <div className="eff-container flex items-center justify-between !px-0">
         <Link

@@ -126,7 +126,7 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
                   sizes="100vw"
                   className="object-cover md:hidden block"
                   style={{ objectPosition: "center 10%" }}
-                  priority
+                  fetchPriority="high"
                 />
               )}
               <Image
@@ -138,7 +138,7 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
                   hero.media.mobileSrc ? "hidden md:block" : ""
                 }`}
                 style={{ objectPosition: "85% center" }}
-                priority
+                fetchPriority="high"
               />
             </>
           )}

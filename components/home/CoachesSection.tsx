@@ -136,10 +136,10 @@ export function CoachesSection({
                 0{i + 1}
               </span>
               <div className="absolute inset-x-4 bottom-4 text-right">
-                <span className="type-heading-md block text-off-white">
+                <span className="type-heading-md line-clamp-1 block text-off-white">
                   {coach.name}
                 </span>
-                <span className="type-label mt-1 block text-blood-red">
+                <span className="type-label mt-1 line-clamp-1 block text-blood-red">
                   {coach.role}
                 </span>
               </div>

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { getGsap, ScrollTrigger } from "@/lib/animations/gsap";
 import { easings } from "@/lib/animations/easings";
+import { prefersReducedMotion } from "@/lib/animations/reduced-motion";
 
 interface TextRevealProps {
   lines: string[];
@@ -28,6 +29,7 @@ export function TextReveal({
   useGSAP(
     () => {
       if (!ref.current) return;
+      if (prefersReducedMotion()) return;
       const gsap = getGsap();
       const rows = ref.current.querySelectorAll<HTMLElement>("[data-reveal-row]");
 

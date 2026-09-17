@@ -132,7 +132,7 @@ export function DisciplinesSection({
               <span className="type-label absolute left-4 top-4 text-blood-red">
                 {item.index}
               </span>
-              <span className="type-heading-md absolute inset-x-4 bottom-4 text-off-white">
+              <span className="type-heading-md absolute inset-x-4 bottom-4 line-clamp-2 text-off-white">
                 {item.name}
               </span>
             </div>

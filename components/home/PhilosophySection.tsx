@@ -42,8 +42,10 @@ export function PhilosophySection({
         />
       </div>
 
-      {/* Smooth blurred gradient behind the text only, fading out before the fighter */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-r from-white/70 via-white/20 to-transparent backdrop-blur-lg [mask-image:linear-gradient(to_right,black_40%,transparent_75%)]" />
+      {/* Scrim behind the text only, sized to the text block's footprint so the
+          rest of the photo (and the values grid below) stay clear on mobile. */}
+      <div className="absolute inset-x-0 top-0 z-0 h-[62%] bg-gradient-to-b from-off-white/95 via-off-white/70 to-transparent md:hidden" />
+      <div className="absolute inset-0 z-0 hidden bg-gradient-to-r from-white/70 via-white/20 to-transparent backdrop-blur-lg [mask-image:linear-gradient(to_right,black_40%,transparent_75%)] md:block" />
 
       <div className="eff-container relative z-10 flex w-full flex-1 flex-col">
         {/* Main Content (Centered Vertically on desktop) */}
@@ -58,16 +60,16 @@ export function PhilosophySection({
             <TextReveal
               lines={philosophy.headline}
               className="mt-4"
-              lineClassName="font-heading text-[5.5rem] md:text-[7rem] lg:text-[8.5rem] leading-none text-fight-black tracking-normal uppercase pb-2"
+              lineClassName="font-heading text-[clamp(2.75rem,13vw,4rem)] md:text-[7rem] lg:text-[8.5rem] leading-[0.95] md:leading-none text-fight-black tracking-normal uppercase pb-2"
             />
 
-            <SectionReveal delay={0.15} className="mt-4 max-w-md">
-              <p className="type-body-lg text-fight-black/80">
+            <SectionReveal delay={0.15} className="mt-3 max-w-md md:mt-4">
+              <p className="type-body-sm md:type-body-lg text-fight-black/80">
                 {philosophy.copy}
               </p>
               <CtaButton
                 href="/about"
-                className="mt-8 bg-fight-black text-off-white hover:bg-blood-red hover:text-off-white"
+                className="mt-6 bg-fight-black text-off-white hover:bg-blood-red hover:text-off-white md:mt-8"
               >
                 {philosophy.cta}
               </CtaButton>
@@ -76,7 +78,7 @@ export function PhilosophySection({
         </div>
 
         {/* Values Grid (Pushed to bottom on desktop) */}
-        <SectionReveal delay={0.25} className="mt-8 w-full max-w-3xl lg:mt-16">
+        <SectionReveal delay={0.25} className="relative z-10 mt-8 w-full max-w-3xl rounded-sm bg-off-white/90 px-4 py-6 backdrop-blur-sm sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none lg:mt-16">
           <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-fight-black/15 pt-8 sm:grid-cols-4 sm:gap-x-4 lg:gap-x-8">
             {philosophy.values.map((value, idx) => (
               <div 
