@@ -5,8 +5,8 @@ import { useGSAP } from "@gsap/react";
 import { getGsap, ScrollTrigger } from "@/lib/animations/gsap";
 import { easings } from "@/lib/animations/easings";
 import { prefersReducedMotion } from "@/lib/animations/reduced-motion";
-import { MediaPlaceholder } from "@/components/media/MediaPlaceholder";
 import { TextReveal } from "@/components/animation/TextReveal";
+import Image from "next/image";
 import { CtaButton } from "@/components/ui/cta-button";
 import { Phone } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
@@ -62,11 +62,11 @@ export function FinalCTASection({ finalCta }: { finalCta: FinalCtaContent }) {
       className="relative flex min-h-[65vh] items-center overflow-hidden bg-fight-black py-24 md:min-h-[75vh]"
     >
       <div ref={mediaRef} className="absolute inset-0">
-        <MediaPlaceholder
+        <Image
+          src="/Images/Bg Images/FinalCTABg.png"
           alt="Fighter training at Elite Fight Force, final call to action"
-          aspect="h-full w-full"
-          className="h-full w-full"
-          label="final-cta.jpg"
+          fill
+          className="object-cover object-center"
         />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-fight-black via-fight-black/70 to-fight-black/40" />

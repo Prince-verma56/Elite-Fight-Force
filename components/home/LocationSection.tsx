@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { TextReveal } from "@/components/animation/TextReveal";
 import { SectionReveal } from "@/components/animation/SectionReveal";
@@ -16,8 +17,18 @@ interface LocationContent {
 
 export function LocationSection({ location }: { location: LocationContent }) {
   return (
-    <section className="bg-fight-black py-20 md:py-28">
-      <div className="eff-container">
+    <section className="relative overflow-hidden py-20 md:py-28">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/Images/Bg Images/OurLocationBg.png"
+          alt="Our Location background"
+          fill
+          className="object-cover object-center"
+        />
+      </div>
+
+      <div className="relative z-10 eff-container">
         <SectionReveal>
           <span className="type-eyebrow text-blood-red">
             {location.eyebrow}
@@ -30,7 +41,7 @@ export function LocationSection({ location }: { location: LocationContent }) {
         />
       </div>
 
-      <div className="eff-container mt-14 grid grid-cols-1 gap-4 md:mt-16 lg:grid-cols-3">
+      <div className="relative z-10 eff-container mt-14 grid grid-cols-1 gap-4 md:mt-16 lg:grid-cols-3">
         <SectionReveal className="flex flex-col justify-between border border-line/70 p-7">
           <div>
             <MapPin className="size-5 text-blood-red" aria-hidden />
@@ -74,7 +85,7 @@ export function LocationSection({ location }: { location: LocationContent }) {
         </SectionReveal>
       </div>
 
-      <SectionReveal delay={0.3} className="eff-container mt-10">
+      <SectionReveal delay={0.3} className="relative z-10 eff-container mt-10">
         <div className="border-t border-line/70 pt-6">
           <span className="type-label text-smoke">
             {location.serviceAreaLabel}

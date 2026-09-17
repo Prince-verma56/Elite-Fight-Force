@@ -65,13 +65,13 @@
     "cta": "Play Video",
     "panels": [
       "/Images/Trainning Exp/Card1P.png",
-      "/Images/Trainning Exp/Card1P.png",
-      "/Images/Trainning Exp/Card1P.png",
-      "/Images/Trainning Exp/Card1P.png",
-      "/Images/Trainning Exp/Card1P.png",
-      "/Images/Trainning Exp/Card1P.png",
-      "/Images/Trainning Exp/Card1P.png",
-      "/Images/Trainning Exp/Card1P.png"
+      "/Images/Bg Images/MoreThanAGym02.png",
+      "/Images/Dicipline Section/Muay Thai.png",
+      "/Images/Bg Images/MoreThanAGym03.png",
+      "/Images/Bg Images/Our Fight Team.png",
+      "/Images/Dicipline Section/Boxing.png",
+      "/Images/Dicipline Section/Brazillian Jiu Jitsu.png",
+      "/Images/Bg Images/LandingPageBg.png"
     ]
   },
   "timetable": {

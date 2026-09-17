@@ -20,14 +20,11 @@ export function TrainingExperience({
 }: {
   insideEff: InsideEffContent;
 }) {
-  const carouselImages = [
-    { src: "https://images.unsplash.com/photo-1557747357-b3302a733ae4?w=900&auto=format&fit=crop&q=60", alt: "Training 1", title: "Strength" },
-    { src: "https://images.unsplash.com/photo-1579205149708-f5b24c5a04e5?w=900&auto=format&fit=crop&q=60", alt: "Training 2", title: "Conditioning" },
-    { src: "https://images.unsplash.com/photo-1637961239801-d0dfcc1a9340?w=900&auto=format&fit=crop&q=60", alt: "Training 3", title: "Endurance" },
-    { src: "https://images.unsplash.com/photo-1748572495955-4f301f8e93ba?w=900&auto=format&fit=crop&q=60", alt: "Training 4", title: "Flexibility" },
-    { src: "https://images.unsplash.com/photo-1664705792423-89f2016228eb?w=900&auto=format&fit=crop&q=60", alt: "Training 5", title: "Power" },
-    { src: "https://images.unsplash.com/photo-1601233750964-940fc7080ba5?w=900&auto=format&fit=crop&q=60", alt: "Training 6", title: "Agility" },
-  ];
+  const carouselImages = insideEff.panels.map((src, index) => ({
+    src,
+    alt: `Elite Fight Force Training Experience ${index + 1}`,
+    title: `Effort & Discipline ${index + 1}`
+  }));
 
   return (
     <section className="relative overflow-hidden bg-fight-black py-24 md:py-32 lg:min-h-[clamp(800px,105vh,1100px)] lg:py-40">
