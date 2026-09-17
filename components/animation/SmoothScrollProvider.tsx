@@ -6,6 +6,18 @@ import { getGsap, ScrollTrigger } from "@/lib/animations/gsap";
 import { prefersReducedMotion } from "@/lib/animations/reduced-motion";
 
 export function SmoothScrollProvider({ children }: { children: ReactNode }) {
+  // Runs regardless of reduced-motion/touch: late-loading images and web
+  // fonts shift section heights after ScrollTrigger's initial layout pass,
+  // leaving reveal triggers pointed at stale pixel offsets (most visible on
+  // mobile, where more of the page's total height comes from image-heavy
+  // sections). Re-measuring once everything has settled keeps them accurate.
+  useEffect(() => {
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("load", refresh);
+    document.fonts?.ready.then(refresh).catch(() => {});
+    return () => window.removeEventListener("load", refresh);
+  }, []);
+
   useEffect(() => {
     if (prefersReducedMotion()) return;
     // Coarse-pointer (touch) devices already get well-tuned native momentum

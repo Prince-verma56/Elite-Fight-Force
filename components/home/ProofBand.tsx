@@ -27,45 +27,53 @@ export function ProofBand({ stats }: { stats: ProofStat[] }) {
       gsap.set(items, { opacity: 0, y: 14 });
       gsap.set(rules, { scaleY: 0 });
 
+      let played = false;
+      const play = () => {
+        if (played) return;
+        played = true;
+        gsap.to(items, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: easings.out3,
+        });
+        gsap.to(rules, {
+          scaleY: 1,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: easings.out2,
+        });
+
+        if (reduced) return;
+
+        counters.forEach((el, i) => {
+          const raw = el.dataset.proofValue ?? "";
+          const match = raw.match(/^(\d+)(.*)$/);
+          if (!match) return;
+          const [, digits, suffix] = match;
+          const target = Number(digits);
+          const counter = { val: 0 };
+
+          gsap.to(counter, {
+            val: target,
+            duration: 1.1,
+            delay: 0.15 + i * 0.08,
+            ease: easings.out3,
+            onUpdate: () => {
+              el.textContent = `${Math.round(counter.val)}${suffix}`;
+            },
+          });
+        });
+      };
+
       ScrollTrigger.create({
         trigger: ref.current,
         start: "top 90%",
         once: true,
-        onEnter: () => {
-          gsap.to(items, {
-            opacity: 1,
-            y: 0,
-            duration: 0.6,
-            stagger: 0.08,
-            ease: easings.out3,
-          });
-          gsap.to(rules, {
-            scaleY: 1,
-            duration: 0.5,
-            stagger: 0.08,
-            ease: easings.out2,
-          });
-
-          if (reduced) return;
-
-          counters.forEach((el, i) => {
-            const raw = el.dataset.proofValue ?? "";
-            const match = raw.match(/^(\d+)(.*)$/);
-            if (!match) return;
-            const [, digits, suffix] = match;
-            const target = Number(digits);
-            const counter = { val: 0 };
-
-            gsap.to(counter, {
-              val: target,
-              duration: 1.1,
-              delay: 0.15 + i * 0.08,
-              ease: easings.out3,
-              onUpdate: () => {
-                el.textContent = `${Math.round(counter.val)}${suffix}`;
-              },
-            });
-          });
+        onEnter: play,
+        onRefresh: (self) => {
+          if (self.progress > 0) play();
         },
       });
     },

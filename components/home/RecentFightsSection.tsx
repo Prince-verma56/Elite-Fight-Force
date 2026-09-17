@@ -27,17 +27,25 @@ export function RecentFightsSection({
 
       gsap.set(line, { scaleX: 0 });
 
+      let played = false;
+      const play = () => {
+        if (played) return;
+        played = true;
+        gsap.to(line, {
+          scaleX: 1,
+          duration: 0.7,
+          delay: 0.5,
+          ease: easings.out3,
+        });
+      };
+
       ScrollTrigger.create({
         trigger: rootRef.current,
         start: "top 75%",
         once: true,
-        onEnter: () => {
-          gsap.to(line, {
-            scaleX: 1,
-            duration: 0.7,
-            delay: 0.5,
-            ease: easings.out3,
-          });
+        onEnter: play,
+        onRefresh: (self) => {
+          if (self.progress > 0) play();
         },
       });
     },

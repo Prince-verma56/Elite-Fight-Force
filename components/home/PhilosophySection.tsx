@@ -22,7 +22,7 @@ export function PhilosophySection({
   philosophy: PhilosophyContent;
 }) {
   return (
-    <section className="relative flex flex-col overflow-hidden py-14 md:py-20 lg:min-h-[clamp(700px,85vh,1000px)] lg:py-24">
+    <section className="relative flex flex-col overflow-hidden pt-14 pb-0 md:py-20 lg:min-h-[clamp(700px,85vh,1000px)] lg:py-24">
       <div className="absolute inset-0 z-0">
         <Image
           src="/Images/Bg Images/MoreThanAGymBgPhone.png"
@@ -42,9 +42,7 @@ export function PhilosophySection({
         />
       </div>
 
-      {/* Scrim behind the text only, sized to the text block's footprint so the
-          rest of the photo (and the values grid below) stay clear on mobile. */}
-      <div className="absolute inset-x-0 top-0 z-0 h-[62%] bg-gradient-to-b from-off-white/95 via-off-white/70 to-transparent md:hidden" />
+      {/* Scrim behind the text on desktop */}
       <div className="absolute inset-0 z-0 hidden bg-gradient-to-r from-white/70 via-white/20 to-transparent backdrop-blur-lg [mask-image:linear-gradient(to_right,black_40%,transparent_75%)] md:block" />
 
       <div className="eff-container relative z-10 flex w-full flex-1 flex-col">
@@ -77,18 +75,18 @@ export function PhilosophySection({
           </div>
         </div>
 
-        {/* Values Grid (Pushed to bottom on desktop) */}
-        <SectionReveal delay={0.25} className="relative z-10 mt-8 w-full max-w-3xl rounded-sm bg-off-white/90 px-4 py-6 backdrop-blur-sm sm:bg-transparent sm:px-0 sm:py-0 sm:backdrop-blur-none lg:mt-16">
-          <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-t border-fight-black/15 pt-8 sm:grid-cols-4 sm:gap-x-4 lg:gap-x-8">
+        {/* Values Grid (Pushed to bottom on desktop & Mobile) */}
+        <SectionReveal delay={0.25} className="relative z-10 mt-8 w-full md:max-w-3xl lg:mt-16 max-md:mt-auto max-md:w-[100vw] max-md:-ml-6 max-md:px-6 max-md:py-4 max-md:bg-white/10 max-md:backdrop-blur-xl max-md:border-t max-md:border-white/20">
+          <div className="grid md:grid-cols-4 gap-x-4 lg:gap-x-8 border-t border-fight-black/15 pt-8 max-md:flex max-md:flex-row max-md:items-center max-md:justify-between max-md:border-none max-md:pt-0">
             {philosophy.values.map((value, idx) => (
               <div 
                 key={value.word} 
-                className={`relative ${idx !== 0 ? 'sm:before:absolute sm:before:-left-3 sm:before:top-1 sm:before:h-8 sm:before:w-[2px] sm:before:bg-blood-red/80 lg:before:-left-5' : ''}`}
+                className={`relative max-md:flex max-md:flex-col max-md:items-center max-md:text-center ${idx !== 0 ? 'md:before:absolute md:before:-left-3 md:before:top-1 md:before:h-8 md:before:w-[2px] md:before:bg-blood-red/80 lg:before:-left-5' : ''}`}
               >
-                <div className="type-heading-md text-fight-black tracking-tight">
+                <div className="type-heading-md text-fight-black tracking-tight max-md:text-[10px] max-md:uppercase max-md:tracking-widest">
                   {value.word}
                 </div>
-                <div className="type-body-sm mt-1.5 leading-snug text-fight-black/65">
+                <div className="type-body-sm mt-1.5 leading-snug text-fight-black/65 max-md:hidden">
                   {value.detail}
                 </div>
               </div>

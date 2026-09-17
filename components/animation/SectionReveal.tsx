@@ -35,18 +35,31 @@ export function SectionReveal({
 
       gsap.set(ref.current, { y, opacity: 0 });
 
+      let played = false;
+      const play = () => {
+        if (played) return;
+        played = true;
+        gsap.to(ref.current, {
+          y: 0,
+          opacity: 1,
+          duration,
+          delay,
+          ease: easings.out3,
+        });
+      };
+
       ScrollTrigger.create({
         trigger: ref.current,
         start: "top 85%",
         once: true,
-        onEnter: () => {
-          gsap.to(ref.current, {
-            y: 0,
-            opacity: 1,
-            duration,
-            delay,
-            ease: easings.out3,
-          });
+        onEnter: play,
+        // If the trigger's start line is already scrolled past by the time
+        // this refresh runs (short mobile viewport, restored scroll position,
+        // or a layout shift from a late-loading image), onEnter never fires
+        // and the element would stay stuck at opacity:0 forever — catch that
+        // here and snap straight to the revealed state instead.
+        onRefresh: (self) => {
+          if (self.progress > 0) play();
         },
       });
     },

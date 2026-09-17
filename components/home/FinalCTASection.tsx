@@ -40,16 +40,24 @@ export function FinalCTASection({ finalCta }: { finalCta: FinalCtaContent }) {
         }
       );
 
+      let played = false;
+      const play = () => {
+        if (played) return;
+        played = true;
+        gsap.to("[data-cta-line]", {
+          scaleX: 1,
+          duration: 0.9,
+          ease: easings.out3,
+        });
+      };
+
       ScrollTrigger.create({
         trigger: rootRef.current,
         start: "top 80%",
         once: true,
-        onEnter: () => {
-          gsap.to("[data-cta-line]", {
-            scaleX: 1,
-            duration: 0.9,
-            ease: easings.out3,
-          });
+        onEnter: play,
+        onRefresh: (self) => {
+          if (self.progress > 0) play();
         },
       });
     },

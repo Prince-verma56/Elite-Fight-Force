@@ -40,22 +40,31 @@ export function MaskReveal({
         y: direction === "up" ? 40 : 0,
       });
 
+      let played = false;
+      const play = () => {
+        if (played) return;
+        played = true;
+        gsap.to(wrapRef.current, {
+          clipPath: "inset(0% 0% 0% 0%)",
+          duration: 1.1,
+          ease: easings.expoOut,
+        });
+        gsap.to(innerRef.current, {
+          scale: 1,
+          y: 0,
+          duration: 1.3,
+          ease: easings.out4,
+        });
+      };
+
       ScrollTrigger.create({
         trigger: wrapRef.current,
         start: "top 80%",
         once: true,
-        onEnter: () => {
-          gsap.to(wrapRef.current, {
-            clipPath: "inset(0% 0% 0% 0%)",
-            duration: 1.1,
-            ease: easings.expoOut,
-          });
-          gsap.to(innerRef.current, {
-            scale: 1,
-            y: 0,
-            duration: 1.3,
-            ease: easings.out4,
-          });
+        onEnter: play,
+        // Same already-past-start safety net as SectionReveal/TextReveal.
+        onRefresh: (self) => {
+          if (self.progress > 0) play();
         },
       });
     },

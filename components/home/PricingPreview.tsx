@@ -39,25 +39,33 @@ export function PricingPreview({
       gsap.set(featured, { scale: restScale * 0.94 });
       if (glow) gsap.set(glow, { opacity: 0 });
 
+      let played = false;
+      const play = () => {
+        if (played) return;
+        played = true;
+        gsap.to(featured, {
+          scale: restScale,
+          duration: 0.9,
+          delay: 0.32,
+          ease: easings.out4,
+        });
+        if (glow) {
+          gsap.to(glow, {
+            opacity: 1,
+            duration: 1.1,
+            delay: 0.4,
+            ease: easings.out2,
+          });
+        }
+      };
+
       ScrollTrigger.create({
         trigger: gridRef.current,
         start: "top 80%",
         once: true,
-        onEnter: () => {
-          gsap.to(featured, {
-            scale: restScale,
-            duration: 0.9,
-            delay: 0.32,
-            ease: easings.out4,
-          });
-          if (glow) {
-            gsap.to(glow, {
-              opacity: 1,
-              duration: 1.1,
-              delay: 0.4,
-              ease: easings.out2,
-            });
-          }
+        onEnter: play,
+        onRefresh: (self) => {
+          if (self.progress > 0) play();
         },
       });
     },

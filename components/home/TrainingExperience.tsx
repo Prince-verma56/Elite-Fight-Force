@@ -69,18 +69,26 @@ export function TrainingExperience({
           transformPerspective: 1000,
         });
 
+        let played = false;
+        const play = () => {
+          if (played) return;
+          played = true;
+          gsap.to(panelsRef.current, {
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 1.2,
+            ease: easings.out4,
+          });
+        };
+
         ScrollTrigger.create({
           trigger: panelsRef.current,
           start: "top 88%",
           once: true,
-          onEnter: () => {
-            gsap.to(panelsRef.current, {
-              y: 0,
-              scale: 1,
-              opacity: 1,
-              duration: 1.2,
-              ease: easings.out4,
-            });
+          onEnter: play,
+          onRefresh: (self) => {
+            if (self.progress > 0) play();
           },
         });
       }
