@@ -1,0 +1,50 @@
+[
+  {
+    "id": "coach-marcus",
+    "slug": "coach-marcus",
+    "name": "Coach Marcus",
+    "role": "Head Coach — Boxing",
+    "disciplines": ["Boxing"],
+    "record": "Fight Record: 12-4-0",
+    "image": "/media/coach-marcus.jpg",
+    "featured": true,
+    "source": "placeholder",
+    "notes": "Mock data — replace with client-verified coach profile before launch."
+  },
+  {
+    "id": "coach-sarah",
+    "slug": "coach-sarah",
+    "name": "Coach Sarah",
+    "role": "Muay Thai",
+    "disciplines": ["Muay Thai"],
+    "record": "Fight Record: 10-3-0",
+    "image": "/media/coach-sarah.jpg",
+    "featured": false,
+    "source": "placeholder",
+    "notes": "Mock data — replace with client-verified coach profile before launch."
+  },
+  {
+    "id": "coach-daniel",
+    "slug": "coach-daniel",
+    "name": "Coach Daniel",
+    "role": "MMA / BJJ",
+    "disciplines": ["MMA", "Brazilian Jiu Jitsu"],
+    "record": "Fight Record: 8-1-0",
+    "image": "/media/coach-daniel.jpg",
+    "featured": false,
+    "source": "placeholder",
+    "notes": "Mock data — replace with client-verified coach profile before launch."
+  },
+  {
+    "id": "coach-jason",
+    "slug": "coach-jason",
+    "name": "Coach Jason",
+    "role": "Strength & Conditioning",
+    "disciplines": ["Strength & Conditioning"],
+    "record": "10+ Years Experience",
+    "image": "/media/coach-jason.jpg",
+    "featured": false,
+    "source": "placeholder",
+    "notes": "Mock data — replace with client-verified coach profile before launch."
+  }
+]

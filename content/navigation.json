@@ -1,0 +1,25 @@
+{
+  "primary": [
+    { "label": "Home", "href": "/" },
+    { "label": "About", "href": "/about" },
+    { "label": "Classes", "href": "/classes" },
+    { "label": "Timetable", "href": "/timetable" },
+    { "label": "Pricing", "href": "/pricing" },
+    { "label": "Coaches", "href": "/coaches" },
+    { "label": "Fight Team", "href": "/fight-team" },
+    { "label": "Reviews", "href": "/reviews" },
+    { "label": "Locations", "href": "/locations" }
+  ],
+  "footerClasses": [
+    { "label": "Boxing", "href": "/classes/boxing" },
+    { "label": "Muay Thai", "href": "/classes/muay-thai" },
+    { "label": "MMA", "href": "/classes/mma" },
+    { "label": "Brazilian Jiu Jitsu", "href": "/classes/brazilian-jiu-jitsu" },
+    { "label": "Strength & Conditioning", "href": "/classes/strength-conditioning" },
+    { "label": "Kids Boxing", "href": "/classes/kids-boxing" }
+  ],
+  "legal": [
+    { "label": "Privacy Policy", "href": "/privacy-policy" },
+    { "label": "Terms", "href": "/terms" }
+  ]
+}

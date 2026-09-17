@@ -1,0 +1,99 @@
+"use client";
+
+import { TextReveal } from "@/components/animation/TextReveal";
+import { SectionReveal } from "@/components/animation/SectionReveal";
+import { Play } from "lucide-react";
+import { Carousel_006 } from "@/components/ui/skiper-ui/skiper54";
+import Image from "next/image";
+
+interface InsideEffContent {
+  eyebrow: string;
+  headline: string[];
+  sideMarkers: string[];
+  copy: string;
+  cta: string;
+  panels: string[];
+}
+
+export function TrainingExperience({
+  insideEff,
+}: {
+  insideEff: InsideEffContent;
+}) {
+  const carouselImages = [
+    { src: "https://images.unsplash.com/photo-1557747357-b3302a733ae4?w=900&auto=format&fit=crop&q=60", alt: "Training 1", title: "Strength" },
+    { src: "https://images.unsplash.com/photo-1579205149708-f5b24c5a04e5?w=900&auto=format&fit=crop&q=60", alt: "Training 2", title: "Conditioning" },
+    { src: "https://images.unsplash.com/photo-1637961239801-d0dfcc1a9340?w=900&auto=format&fit=crop&q=60", alt: "Training 3", title: "Endurance" },
+    { src: "https://images.unsplash.com/photo-1748572495955-4f301f8e93ba?w=900&auto=format&fit=crop&q=60", alt: "Training 4", title: "Flexibility" },
+    { src: "https://images.unsplash.com/photo-1664705792423-89f2016228eb?w=900&auto=format&fit=crop&q=60", alt: "Training 5", title: "Power" },
+    { src: "https://images.unsplash.com/photo-1601233750964-940fc7080ba5?w=900&auto=format&fit=crop&q=60", alt: "Training 6", title: "Agility" },
+  ];
+
+  return (
+    <section className="relative overflow-hidden bg-fight-black py-24 md:py-32 lg:min-h-[clamp(800px,105vh,1100px)] lg:py-40">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/Images/Bg Images/RealPeopleRealWorkBg.png"
+          alt="Inside Elite Fight Force"
+          fill
+          className="object-cover opacity-50"
+          style={{ objectPosition: "center top" }}
+        />
+      </div>
+
+      {/* Strong dark glassmorphism overlay for a minimal, blurred background effect */}
+      <div className="absolute inset-0 z-0 bg-fight-black/80 backdrop-blur-[12px]" />
+      
+      <div className="eff-container relative flex flex-col items-center text-center">
+        <SectionReveal>
+          <span className="type-eyebrow text-blood-red">
+            {insideEff.eyebrow}
+          </span>
+        </SectionReveal>
+
+        <TextReveal
+          lines={insideEff.headline}
+          className="mt-4"
+          lineClassName="font-heading text-[5.5rem] md:text-[7rem] lg:text-[8.5rem] leading-[0.95] text-off-white tracking-normal uppercase pb-2"
+        />
+
+        <SectionReveal delay={0.15} className="mt-6 max-w-md">
+          <p className="type-body-md text-off-white/70">{insideEff.copy}</p>
+        </SectionReveal>
+
+        <SectionReveal delay={0.25}>
+          <button
+            type="button"
+            className="type-label mt-8 flex items-center gap-3 text-off-white transition-colors hover:text-blood-red"
+          >
+            <span className="flex size-11 items-center justify-center rounded-full border border-off-white/30">
+              <Play className="size-4" fill="currentColor" aria-hidden />
+            </span>
+            {insideEff.cta}
+          </button>
+        </SectionReveal>
+
+        <SectionReveal delay={0.35} className="mt-16 w-full lg:mt-20">
+          <div className="mx-auto flex h-[500px] w-full max-w-[1400px] items-center justify-center">
+            <Carousel_006 
+              images={carouselImages} 
+              className="w-full"
+              showPagination={true}
+              showNavigation={true}
+              loop={true}
+              autoplay={true}
+            />
+          </div>
+        </SectionReveal>
+
+        <div className="mt-16 hidden gap-10 lg:flex">
+          {insideEff.sideMarkers.map((marker) => (
+            <span key={marker} className="type-label text-smoke">
+              {marker}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

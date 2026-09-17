@@ -1,0 +1,26 @@
+{
+  "businessName": "Elite Fight Force",
+  "shortName": "EFF",
+  "address": "78 Carlingford Street",
+  "suburb": "Sefton",
+  "state": "NSW",
+  "postcode": "2162",
+  "country": "Australia",
+  "phone": "+61 424 497 400",
+  "phoneDisplay": "0424 497 400",
+  "email": "info@elitefightforce.com.au",
+  "domain": "elitefightforce.com.au",
+  "tradingSince": 2017,
+  "socialLinks": {
+    "instagram": "https://instagram.com",
+    "facebook": "https://facebook.com",
+    "youtube": "https://youtube.com",
+    "tiktok": "https://tiktok.com"
+  },
+  "businessDescription": "Boxing, MMA, Muay Thai, Brazilian Jiu Jitsu and Strength & Conditioning in Sefton, NSW. Real training, real people, real progress.",
+  "ctaLabels": {
+    "primary": "Book Your Free Trial",
+    "secondary": "Watch Our Story",
+    "call": "Call The Gym"
+  }
+}

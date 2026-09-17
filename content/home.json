@@ -1,0 +1,117 @@
+{
+  "hero": {
+    "eyebrow": "Sefton, NSW",
+    "eyebrowSecondary": "Training Since 2017",
+    "headline": ["Real", "Training.", "Real People."],
+    "headlineAccentWord": "People.",
+    "supportingCopy": "Boxing, MMA, Muay Thai, Strength & Conditioning. A community built on discipline, respect and hard work.",
+    "media": {
+      "src": "/Images/Bg Images/LandingPageBg.png",
+      "alt": "EFF fighter training on the bag at Elite Fight Force, Sefton",
+      "focalArea": "center 35%"
+    },
+    "sideMarkers": ["Train", "Learn", "Grow", "Belong"],
+    "sectionIndex": "01 / 13"
+  },
+  "proof": {
+    "stats": [
+      { "value": "2017", "label": "Established" },
+      { "value": "9+", "label": "Disciplines" },
+      { "value": "20+", "label": "Experienced Coaches" },
+      { "value": "500+", "label": "Members" },
+      { "value": "Active", "label": "Fight Team" }
+    ]
+  },
+  "philosophy": {
+    "eyebrow": "Our Philosophy",
+    "headline": ["More", "Than", "A Gym."],
+    "copy": "We build stronger, more disciplined and more confident people through world-class coaching, real training and a supportive community.",
+    "cta": "Our Story",
+    "values": [
+      { "word": "Discipline", "detail": "Be consistent." },
+      { "word": "Respect", "detail": "For yourself and others." },
+      { "word": "Community", "detail": "Train together." },
+      { "word": "Progression", "detail": "Be a better version of you." }
+    ],
+    "media": {
+      "primary": {
+        "src": "/media/philosophy-primary.jpg",
+        "alt": "Coach wrapping hands before a training session at Elite Fight Force"
+      },
+      "secondary": {
+        "src": "/media/philosophy-secondary.jpg",
+        "alt": "Members training together on the mats at Elite Fight Force"
+      }
+    }
+  },
+  "disciplines": {
+    "eyebrow": "Our Disciplines",
+    "headline": ["Find", "Your", "Path."],
+    "cta": "Explore All Classes",
+    "items": [
+      { "index": "01", "name": "Boxing", "slug": "boxing", "image": "/Images/Dicipline Section/Boxing.png" },
+      { "index": "02", "name": "Muay Thai", "slug": "muay-thai", "image": "/Images/Dicipline Section/Muay Thai.png" },
+      { "index": "03", "name": "MMA", "slug": "mma", "image": "/Images/Dicipline Section/MMA.png" },
+      { "index": "04", "name": "Brazilian Jiu Jitsu", "slug": "brazilian-jiu-jitsu", "image": "/Images/Dicipline Section/Brazillian Jiu Jitsu.png" },
+      { "index": "05", "name": "Strength & Conditioning", "slug": "strength-conditioning", "image": "/Images/Dicipline Section/Strength and Conditioning.png" },
+      { "index": "06", "name": "Kids & Teens", "slug": "kids-boxing", "image": "/Images/Dicipline Section/Kids and Teens.png" }
+    ]
+  },
+  "insideEff": {
+    "eyebrow": "Inside EFF",
+    "headline": ["Real People.", "Real Work."],
+    "sideMarkers": ["Train", "Learn", "Grow", "Belong"],
+    "copy": "A glimpse into everyday life at Elite Fight Force. Where effort, discipline and community come together.",
+    "cta": "Play Video",
+    "panels": [
+      "/Images/Trainning Exp/Card1P.png",
+      "/Images/Trainning Exp/Card1P.png",
+      "/Images/Trainning Exp/Card1P.png",
+      "/Images/Trainning Exp/Card1P.png",
+      "/Images/Trainning Exp/Card1P.png",
+      "/Images/Trainning Exp/Card1P.png",
+      "/Images/Trainning Exp/Card1P.png",
+      "/Images/Trainning Exp/Card1P.png"
+    ]
+  },
+  "timetable": {
+    "eyebrow": "Training Timetable",
+    "headline": ["Plan", "Your", "Week."],
+    "cta": "View Full Timetable"
+  },
+  "pricing": {
+    "eyebrow": "Membership Options",
+    "headline": ["Simple Pricing.", "Real Value."]
+  },
+  "coaches": {
+    "eyebrow": "Our Coaches",
+    "headline": ["Train With", "The Best."],
+    "quote": "Great coaches create great people.",
+    "cta": "Meet Our Coaches"
+  },
+  "fightTeam": {
+    "eyebrow": "Our Fight Team",
+    "headline": ["Compete.", "Represent.", "Belong."],
+    "copy": "Our fighters compete at local and national events, bringing home results and raising the standard.",
+    "media": "/media/fight-team.jpg",
+    "cta": "View Fight Team",
+    "quote": "Same gym. Different level."
+  },
+  "reviews": {
+    "eyebrow": "Member Reviews",
+    "headline": ["Real Stories.", "Real Impact."],
+    "sideNote": "People Not Members"
+  },
+  "location": {
+    "eyebrow": "Our Location",
+    "headline": ["Right Here", "In Sefton."],
+    "cta": "Get Directions",
+    "watchTour": "Watch Tour",
+    "serviceAreaLabel": "Serving Our Local Area",
+    "serviceAreas": ["Sefton", "Guildford", "Granville", "Chester Hill", "Yagoona", "Bankstown", "and nearby suburbs"]
+  },
+  "finalCta": {
+    "headline": ["Your First Round", "Starts Here."],
+    "copy": "No commitment. Just real training."
+  }
+}

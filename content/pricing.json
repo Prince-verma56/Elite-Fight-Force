@@ -1,0 +1,30 @@
+[
+  {
+    "id": "casual",
+    "name": "Casual",
+    "price": "$25",
+    "period": "/ class",
+    "features": ["All classes", "No lock-in", "Great for drop-ins"],
+    "featured": false,
+    "cta": "Get Started"
+  },
+  {
+    "id": "unlimited",
+    "name": "Unlimited",
+    "price": "$149",
+    "period": "/ month",
+    "features": ["All classes", "No lock-in contract", "Full gym access", "Sauna access"],
+    "featured": true,
+    "badge": "Most Popular",
+    "cta": "Start Free Trial"
+  },
+  {
+    "id": "fight-team",
+    "name": "Fight Team",
+    "price": "$199",
+    "period": "/ month",
+    "features": ["Advanced training", "Competition support", "Strength & conditioning", "Fight camps & travel"],
+    "featured": false,
+    "cta": "Learn More"
+  }
+]

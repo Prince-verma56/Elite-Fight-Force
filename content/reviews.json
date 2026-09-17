@@ -1,0 +1,29 @@
+[
+  {
+    "id": "review-1",
+    "quote": "EFF has completely changed my mindset. The coaches are amazing and the community is unreal. It's more than a gym, it's a second family.",
+    "name": "James T.",
+    "memberType": "Boxing Member",
+    "rating": 5,
+    "source": "placeholder",
+    "image": "https://images.unsplash.com/photo-1557747357-b3302a733ae4?w=900&auto=format&fit=crop&q=60"
+  },
+  {
+    "id": "review-2",
+    "quote": "I started here with zero experience and now I train four times a week. The coaching is patient, real, and the whole gym pushes you to be better.",
+    "name": "Amelia R.",
+    "memberType": "Muay Thai Member",
+    "rating": 5,
+    "source": "placeholder",
+    "image": "https://images.unsplash.com/photo-1579205149708-f5b24c5a04e5?w=900&auto=format&fit=crop&q=60"
+  },
+  {
+    "id": "review-3",
+    "quote": "My kids love their classes here. The coaches take discipline seriously but always keep it fun. Best decision we made as a family.",
+    "name": "Chris D.",
+    "memberType": "Parent, Kids Boxing",
+    "rating": 5,
+    "source": "placeholder",
+    "image": "https://images.unsplash.com/photo-1637961239801-d0dfcc1a9340?w=900&auto=format&fit=crop&q=60"
+  }
+]

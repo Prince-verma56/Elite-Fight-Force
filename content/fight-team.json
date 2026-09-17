@@ -1,0 +1,9 @@
+{
+  "results": [
+    { "date": "Mar 2024", "event": "EFF Fighter", "result": "Win", "note": "Local Event", "source": "placeholder" },
+    { "date": "Nov 2023", "event": "EFF Fighter", "result": "Win", "note": "State Title", "source": "placeholder" },
+    { "date": "Aug 2023", "event": "EFF Fighter", "result": "Loss", "note": "National Event", "source": "placeholder" },
+    { "date": "Apr 2023", "event": "EFF Fighter", "result": "Win", "note": "Local Event", "source": "placeholder" }
+  ],
+  "notes": "Mock fight-record data for layout purposes only. Replace with client-verified results before launch."
+}

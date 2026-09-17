@@ -1,0 +1,45 @@
+{
+  "days": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  "entries": {
+    "Mon": [
+      { "time": "6:00 AM", "className": "Boxing", "level": "All Levels" },
+      { "time": "9:00 AM", "className": "Muay Thai", "level": "All Levels" },
+      { "time": "4:30 PM", "className": "Kids Boxing", "level": "Ages 6-12" },
+      { "time": "5:30 PM", "className": "MMA", "level": "All Levels" },
+      { "time": "6:30 PM", "className": "BJJ", "level": "All Levels" }
+    ],
+    "Tue": [
+      { "time": "6:00 AM", "className": "Strength & Conditioning", "level": "All Levels" },
+      { "time": "9:00 AM", "className": "Boxing", "level": "All Levels" },
+      { "time": "4:30 PM", "className": "Kids MMA", "level": "Ages 6-12" },
+      { "time": "5:30 PM", "className": "Muay Thai", "level": "All Levels" },
+      { "time": "6:30 PM", "className": "Boxing", "level": "All Levels" }
+    ],
+    "Wed": [
+      { "time": "6:00 AM", "className": "Boxing", "level": "All Levels" },
+      { "time": "9:00 AM", "className": "MMA", "level": "All Levels" },
+      { "time": "4:30 PM", "className": "Kids Boxing", "level": "Ages 6-12" },
+      { "time": "5:30 PM", "className": "BJJ", "level": "All Levels" },
+      { "time": "6:30 PM", "className": "Muay Thai", "level": "All Levels" }
+    ],
+    "Thu": [
+      { "time": "6:00 AM", "className": "Strength & Conditioning", "level": "All Levels" },
+      { "time": "9:00 AM", "className": "Boxing", "level": "All Levels" },
+      { "time": "4:30 PM", "className": "Kids MMA", "level": "Ages 6-12" },
+      { "time": "5:30 PM", "className": "MMA", "level": "All Levels" },
+      { "time": "6:30 PM", "className": "Boxing", "level": "All Levels" }
+    ],
+    "Fri": [
+      { "time": "6:00 AM", "className": "Boxing", "level": "All Levels" },
+      { "time": "9:00 AM", "className": "Muay Thai", "level": "All Levels" },
+      { "time": "4:30 PM", "className": "Kids Boxing", "level": "Ages 6-12" },
+      { "time": "5:30 PM", "className": "MMA", "level": "All Levels" },
+      { "time": "6:30 PM", "className": "BJJ", "level": "All Levels" }
+    ],
+    "Sat": [
+      { "time": "9:00 AM", "className": "Boxing", "level": "All Levels" },
+      { "time": "10:00 AM", "className": "MMA", "level": "All Levels" }
+    ],
+    "Sun": []
+  }
+}
