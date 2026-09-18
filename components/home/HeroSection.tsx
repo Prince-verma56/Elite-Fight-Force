@@ -67,17 +67,7 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
           0.9
         );
 
-      // HeroScrollCollapse + background scale drift on scroll
-      gsap.to(mediaInnerRef.current, {
-        scale: 1.12,
-        ease: "none",
-        scrollTrigger: {
-          trigger: rootRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
+      // Background fade drift on scroll (removed scale increase as requested)
 
       gsap.to("[data-hero-content]", {
         y: -60,
@@ -97,7 +87,7 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
   return (
     <section
       ref={rootRef}
-      className="hero-pre-animate relative flex min-h-dvh flex-col bg-fight-black lg:min-h-[clamp(700px,92dvh,980px)]"
+      className="hero-pre-animate relative flex min-h-[100dvh] w-full flex-col overflow-hidden bg-fight-black lg:min-h-[clamp(700px,92dvh,980px)]"
     >
       <div
         ref={mediaRef}
@@ -143,33 +133,40 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
             </>
           )}
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-fight-black via-fight-black/55 to-fight-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-t from-fight-black via-transparent to-fight-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-fight-black/60 md:from-fight-black via-fight-black/40 md:via-fight-black/55 to-fight-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-fight-black via-fight-black/20 md:via-transparent to-fight-black/40 md:to-fight-black/40" />
       </div>
 
       <div
         data-hero-content
-        className="eff-container relative z-10 flex flex-1 flex-col gap-0 sm:gap-6 pt-24 pb-4 sm:pb-8 md:pt-28"
+        className="eff-container relative z-10 flex flex-1 flex-col gap-0 sm:gap-6 pt-28 pb-8 sm:pb-12 md:pt-40"
       >
-        <div data-hero-fade className="flex items-center gap-3 text-off-white">
-          <span className="w-0.5 h-4 bg-blood-red" />
-          <span className="type-eyebrow font-bold tracking-[0.15em]">{hero.eyebrow}</span>
-          <span className="h-3 w-px bg-off-white/30" />
-          <span className="type-eyebrow text-smoke tracking-[0.15em]">
-            {hero.eyebrowSecondary}
-          </span>
+        <div data-hero-fade className="flex items-start justify-between w-full text-off-white">
+          <div className="flex items-start gap-2">
+            <svg className="w-3.5 h-3.5 text-blood-red mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            <div className="flex flex-col">
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase">{hero.eyebrow}</span>
+              <span className="text-[9px] text-off-white/60 tracking-[0.15em] uppercase mt-1">{hero.eyebrowSecondary}</span>
+            </div>
+          </div>
+          
+          <div className="flex flex-col items-start border-b border-blood-red/70 pb-1">
+            <span className="text-[8px] sm:text-[9px] text-off-white/70 tracking-[0.2em] uppercase leading-tight">DISCIPLINE</span>
+            <span className="text-[8px] sm:text-[9px] text-off-white/70 tracking-[0.2em] uppercase leading-tight">BUILDS</span>
+            <span className="text-[8px] sm:text-[9px] text-off-white/70 tracking-[0.2em] uppercase leading-tight">FREEDOM</span>
+          </div>
         </div>
 
-        <div className="flex flex-1 flex-col justify-end pb-4 sm:pb-0 sm:justify-center max-w-4xl mt-12 sm:mt-0">
-          <div className="flex flex-col gap-0 sm:gap-0">
-            <span data-hero-fade className="text-blood-red text-[9px] sm:text-xs font-bold tracking-[0.2em] mb-1 sm:mb-4 uppercase">
+        <div className="flex flex-1 flex-col justify-end pb-8 sm:pb-0 sm:justify-center items-start text-left max-w-4xl mt-12 sm:mt-0">
+          <div className="flex flex-col gap-0 items-start">
+            <span data-hero-fade className="text-blood-red text-[10px] sm:text-xs font-bold tracking-[0.2em] mb-2 sm:mb-4 uppercase">
               Elite Fight Force
             </span>
             {hero.headline.map((word, i) => (
               <div key={`${word}-${i}`} className="overflow-hidden pb-0">
                 <div
                   data-hero-row
-                  className="font-heading text-[clamp(2.75rem,11vw,7.5rem)] leading-[0.9] tracking-normal uppercase text-off-white flex flex-wrap gap-[0.25em]"
+                  className="font-heading text-[clamp(2.5rem,9.5vw,5.5rem)] leading-[0.95] tracking-tight uppercase text-off-white flex flex-wrap justify-start gap-x-2"
                 >
                   {word.split(" ").map((w, wIdx) => (
                     <span
@@ -185,60 +182,49 @@ export function HeroSection({ hero }: { hero: HeroContent }) {
               </div>
             ))}
           </div>
+          
+          <div data-hero-fade className="mt-3 sm:mt-5 text-[8.5px] sm:text-[10px] font-bold tracking-[0.25em] uppercase text-off-white/70 leading-loose max-w-sm">
+             BOXING <span className="text-blood-red mx-1.5">/</span> MMA <span className="text-blood-red mx-1.5">/</span> MUAY THAI<br/>
+             STRENGTH <span className="text-blood-red mx-1.5">/</span> CONDITIONING
+          </div>
 
           <p
             data-hero-fade
-            className="text-sm sm:type-body-lg mt-2 sm:mt-5 max-w-xs sm:max-w-md text-off-white/85"
+            className="text-sm sm:type-body-lg mt-3 sm:mt-5 max-w-[280px] sm:max-w-md text-off-white/85 leading-relaxed"
           >
             {hero.supportingCopy}
           </p>
 
           <div
             data-hero-fade
-            className="mt-4 sm:mt-8 flex flex-col items-start gap-3 sm:gap-6"
+            className="mt-5 sm:mt-7 flex flex-row items-center justify-start gap-3 sm:gap-6 w-full"
           >
-            <CtaButton
+            <Link
               href="/free-trial"
-              className="w-[280px] sm:w-[320px] justify-between sm:justify-between [clip-path:polygon(0_0,100%_0,calc(100%-1.5rem)_100%,0_100%)] pr-12 group"
+              className="bg-blood-red hover:bg-blood-red/90 text-off-white px-4 sm:px-6 py-3 sm:py-3.5 flex items-center justify-center gap-2 sm:gap-3 transition-colors shrink-0"
             >
-              <span className="tracking-[0.1em] text-xs font-bold uppercase">Book Your Free Trial</span>
-            </CtaButton>
-            <div className="flex items-center gap-4">
-              <Link
-                href="/about"
-                className="group flex items-center gap-4 transition-colors hover:text-off-white text-off-white/85"
-              >
-                <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-off-white/30 group-hover:border-off-white/70 transition-colors">
-                  <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current ml-0.5" viewBox="0 0 24 24">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <span className="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase">Watch Our Story</span>
-              </Link>
-              <span className="hidden sm:block h-px w-16 bg-off-white/30" />
-            </div>
+              <span className="tracking-[0.1em] text-[9px] sm:text-[10px] font-bold uppercase">Book Your Free Trial</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mt-0.5">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </Link>
+            
+            <Link
+              href="/about"
+              className="group flex flex-row items-center gap-2 sm:gap-3 transition-colors hover:text-off-white text-off-white/85 shrink-0"
+            >
+              <div className="flex items-center justify-center w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-off-white/30 group-hover:border-off-white/70 transition-colors">
+                <svg className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current ml-0.5" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+              <span className="text-[7.5px] sm:text-[8.5px] font-bold tracking-[0.2em] uppercase text-left leading-tight">
+                Watch<br/>Our Story
+              </span>
+            </Link>
           </div>
         </div>
 
-        <div
-          data-hero-fade
-          className="mt-auto flex items-end justify-between pt-0 pb-4 sm:pt-5 sm:pb-5"
-        >
-          <div className="flex items-center gap-6">
-            <span className="type-label text-off-white font-bold tracking-widest">{hero.sectionIndex}</span>
-            <div className="flex items-center gap-2">
-              <span className="w-8 h-0.5 bg-blood-red" />
-              <span className="w-8 h-0.5 bg-off-white/20" />
-              <span className="w-8 h-0.5 bg-off-white/20" />
-            </div>
-          </div>
-          <div className="flex flex-col items-center gap-3 text-off-white">
-            <span className="type-label [writing-mode:vertical-rl] tracking-[0.3em] text-[10px]">SCROLL</span>
-            <svg className="w-3 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </div>
-        </div>
       </div>
     </section>
   );

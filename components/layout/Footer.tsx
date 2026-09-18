@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Phone, Mail, MapPin, ChevronsRight } from "lucide-react";
+import { Phone, Mail, MapPin, ChevronsRight, Flame } from "lucide-react";
 import { InstagramIcon, FacebookIcon, YoutubeIcon } from "@/components/ui/social-icons";
 import { siteConfig } from "@/lib/site-config";
 
@@ -121,7 +121,7 @@ export function Footer() {
               <div className="sm:col-span-2">
                 <h3 className="type-label mb-5 text-off-white uppercase">Sponsors</h3>
                 <ul className="grid grid-cols-2 sm:grid-cols-2 gap-y-2.5 gap-x-4">
-                  {['WebDash', 'EPH', 'Marvel Skip Bins', 'AMS Solutions', 'Masnad Health Clinic', 'Confidential Cosmemtics', 'Plumbing Elite'].map((sponsor) => (
+                  {['Angaar Labs', 'EPH', 'Marvel Skip Bins', 'AMS Solutions', 'Masnad Health Clinic', 'Confidential Cosmemtics', 'Plumbing Elite'].map((sponsor) => (
                     <li key={sponsor} className="flex items-center gap-2 type-body-sm text-off-white/80">
                       <ChevronsRight className="size-3.5 text-blood-red shrink-0" />
                       {sponsor}
@@ -138,12 +138,18 @@ export function Footer() {
           <p className="type-caption text-off-white/70 text-center">
             Copyright &copy; {new Date().getFullYear()}. All rights reserved.
           </p>
-          <p className="type-caption text-off-white/50 text-center">
-            Made by WebDash &ndash; developing affordable futuristic websites
-          </p>
-          <div className="mt-2 text-off-white font-heading text-xl tracking-widest flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity">
-            <span className="font-light">WEB</span><span className="font-bold ml-1">DASH</span>
+          <div className="flex flex-col items-center gap-1.5">
+            <p className="type-caption text-off-white/50 text-center">
+              Made by <a href="https://labs.theangaarbatch.in" target="_blank" rel="noopener noreferrer" className="text-off-white hover:text-blood-red transition-colors font-medium">Angaar Labs</a>
+            </p>
+            <p className="type-caption text-off-white/40 text-center">
+              Contact us: <a href="mailto:hello@angaarlabs.com" className="hover:text-blood-red transition-colors">hello@angaarlabs.com</a>
+            </p>
           </div>
+          <a href="https://labs.theangaarbatch.in" target="_blank" rel="noopener noreferrer" className="mt-2 text-off-white font-heading text-xl tracking-widest flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity group">
+            <Flame className="text-[#FF4F2A] fill-[#FF4F2A] mr-2 size-6 group-hover:scale-110 transition-transform" />
+            <span className="font-bold">Angaar</span><span className="font-light ml-2 text-[#FF4F2A]">Labs</span>
+          </a>
         </div>
       </div>
     </footer>
