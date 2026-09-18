@@ -62,7 +62,7 @@ export function PhilosophySection({
             />
 
             <SectionReveal delay={0.15} className="mt-3 max-w-md md:mt-4">
-              <p className="type-body-sm md:type-body-lg text-fight-black/80">
+              <p className="type-body-sm md:type-body-lg text-off-white/95 md:text-fight-black/80 drop-shadow-md md:drop-shadow-none font-medium md:font-normal">
                 {philosophy.copy}
               </p>
               <CtaButton
